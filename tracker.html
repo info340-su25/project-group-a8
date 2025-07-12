@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unfold - Daily Check-In</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="img/favicon.png">
+</head>
+
+<body>
+  <header class="d-flex justify-content-between align-items-center px-4 py-3 border-bottom">
+    <a href="index.html" class="d-flex align-items-center text-decoration-none">
+      <img src="img/unfold_logo.png" alt="Unfold Logo" height="60">
+      <span class="visually-hidden">Home</span>
+    </a>
+
+    <button class="btn menu-toggle" aria-label="Menu">&#9776;</button>
+  </header>
+
+  <main class="container py-4">
+    <section class="text-center mb-4">
+      <h2>Hi, Ellie</h2>
+      <h3>How are you feeling today?</h3>
+
+      <div class="d-flex justify-content-center my-3">
+        <a href="#checkin" class="btn checkin-btn px-4 py-2">
+            Complete Daily Check-In
+        </a>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <img src="img/cute_lil_bear.png" alt="Cute bear illustration" class="img-fluid" style="max-height: 200px;">
+      </div>
+
+      <p class="mt-3">Noticing how you feel today can help you care for tomorrow.</p>
+    </section>
+
+
+    <section id="checkin" class="container my-5">
+        <!-- mood -->
+        <div class="mb-5 text-center">
+          <h2>Mood</h2>
+      
+          <div class="mb-4 mt-5">
+            <label for="energy" class="form-label">Energy</label>
+            <div class="d-flex justify-content-between px-2 mb-1 small">
+                <span>Exhausted</span>
+                <span>Buzzing</span>
+            </div>
+            <input type="range" class="form-range" id="energy" name="energy" min="0" max="10">
+          </div>
+      
+          <div class="mb-4">
+            <label for="stress" class="form-label">Stress</label>
+            <div class="d-flex justify-content-between px-2 mb-1 small">
+                <span>Calm</span>
+                <span>Anxious</span>
+            </div>
+            <input type="range" class="form-range" id="stress" name="stress" min="0" max="10">
+          </div>
+      
+          <div class="mb-4">
+            <label for="excitement" class="form-label">Excitement</label>
+            <div class="d-flex justify-content-between px-2 mb-1 small">
+                <span>Flat</span>
+                <span>Thrilled</span>
+            </div>
+            <input type="range" class="form-range" id="excitement" name="excitement" min="0" max="10">
+          </div>
+      
+          <div class="mb-4">
+            <label for="overallMood" class="form-label">Overall</label>
+            <div class="d-flex justify-content-between px-2 mb-1 small">
+                <span>Low</span>
+                <span>High</span>
+            </div>
+            <input type="range" class="form-range" id="overallMood" name="overallMood" min="0" max="10">
+          </div>
+        </div>
+
+        <!--social battery-->
+        <div class="mb-5 text-center">
+            <h2>Social Battery</h2>
+
+            <p class="mb-2">Tell us how social you feel today</p>
+            <div class="d-flex justify-content-between px-2 mb-1 small">
+                <span>Tapped Out</span>
+                <span>Ready To Mingle!</span>
+            </div>
+            <input type="range" class="form-range mb-3" id="socialBattery" name="socialBattery" min="0" max="10">
+
+            <p class="mt-4">Do you have social plans?</p>
+            <div class="p-3 rounded" style="background-color: #FFF6C6;">
+            <div class="form-check text-start mb-2">
+                <input class="form-check-input" type="checkbox" id="plansNone" name="socialPlans" value="none">
+                <label class="form-check-label" for="plansNone">Nope — Nothing today!</label>
+            </div>
+            <div class="form-check text-start mb-2">
+                <input class="form-check-input" type="checkbox" id="plansMaybe" name="socialPlans" value="maybe">
+                <label class="form-check-label" for="plansMaybe">Not yet. Maybe I’ll make some</label>
+            </div>
+            <div class="form-check text-start mb-2">
+                <input class="form-check-input" type="checkbox" id="plansObligatory" name="socialPlans" value="obligatory">
+                <label class="form-check-label" for="plansObligatory">Yep — Obligatory</label>
+            </div>
+            <div class="form-check text-start">
+                <input class="form-check-input" type="checkbox" id="plansExcited" name="socialPlans" value="excited">
+                <label class="form-check-label" for="plansExcited">Yes! Good ones :)</label>
+            </div>
+            </div>
+        </div>
+
+        
+        <!-- digital well-being -->
+        <section class="container my-5 text-center">
+            <h2>Digital Well-Being</h2>
+          
+            <h5 class="mt-4">Screen-Time Satisfaction</h5>
+            <div class="d-flex justify-content-between px-2 mb-1 small">
+              <span>Wasted Time</span>
+              <span>Intentional Use</span>
+            </div>
+            <input type="range" class="form-range" id="screenTime" name="screenTime" min="0" max="10">
+          
+            <div class="p-3 mt-4 rounded" style="background-color: #FFF6C6;">
+              <div class="form-check text-start mb-2">
+                <input class="form-check-input" type="checkbox" id="doomscroll" name="digitalHabits" value="doomscroll">
+                <label class="form-check-label" for="doomscroll">Doomscrolled</label>
+              </div>
+              <div class="form-check text-start mb-2">
+                <input class="form-check-input" type="checkbox" id="intentional" name="digitalHabits" value="intentional">
+                <label class="form-check-label" for="intentional">Used phone with intention</label>
+              </div>
+              <div class="form-check text-start mb-2">
+                <input class="form-check-input" type="checkbox" id="break" name="digitalHabits" value="break">
+                <label class="form-check-label" for="break">Took a break from screens</label>
+              </div>
+              <div class="form-check text-start mb-2">
+                <input class="form-check-input" type="checkbox" id="mindless" name="digitalHabits" value="mindless">
+                <label class="form-check-label" for="mindless">Mindlessly watched stuff</label>
+              </div>
+              <div class="form-check text-start">
+                <input class="form-check-input" type="checkbox" id="worktime" name="digitalHabits" value="work">
+                <label class="form-check-label" for="worktime">Lots of digital work time</label>
+              </div>
+            </div>
+        </section>
+
+        <!-- mind space -->
+        <section class="container my-5 text-center">
+            <h2>Mind Space</h2>
+          
+            <div class="mb-4">
+              <label for="clarity" class="form-label">Brain Clarity</label>
+              <div class="d-flex justify-content-between px-2 mb-1 small">
+                <span>Foggy</span>
+                <span>Crystal Clear</span>
+              </div>
+              <input type="range" class="form-range" id="clarity" name="clarity" min="0" max="10">
+            </div>
+          
+            <div class="mb-4">
+              <label for="selflove" class="form-label">Self-Love</label>
+              <div class="d-flex justify-content-between px-2 mb-1 small">
+                <span>Hard on Myself</span>
+                <span>Gave Myself Grace</span>
+              </div>
+              <input type="range" class="form-range" id="selflove" name="selflove" min="0" max="10">
+            </div>
+          
+            <div class="mb-4">
+              <label for="positivity" class="form-label">Overall Positivity</label>
+              <div class="d-flex justify-content-between px-2 mb-1 small">
+                <span>Down Today</span>
+                <span>Feeling Uplifted</span>
+              </div>
+              <input type="range" class="form-range" id="positivity" name="positivity" min="0" max="10">
+            </div>
+        </section>
+
+        <!-- sleep -->
+        <section class="container my-5 text-center">
+            <h2>Sleep</h2>
+            <h5 class="fst-italic">How’d you sleep last night?</h5>
+          
+            <div class="mb-4">
+              <textarea class="form-control" rows="3" placeholder="(No pressure — just check in with how you’re feeling.)"></textarea>
+            </div>
+          
+            <div class="mb-4">
+              <label for="restfulness" class="form-label">Restfulness</label>
+              <div class="d-flex justify-content-between px-2 mb-1 small">
+                <span>Running on Empty</span>
+                <span>Rested & Recharged</span>
+              </div>
+              <input type="range" class="form-range" id="restfulness" name="restfulness" min="0" max="10">
+            </div>
+          
+            <div class="mb-4">
+              <label for="sleepHours" class="form-label">How many hours of sleep did you get?</label>
+              <select class="form-select" id="sleepHours" name="sleepHours">
+                <option selected disabled>Select</option>
+                <option value="0–3">0–3 hours</option>
+                <option value="4–5">4–5 hours</option>
+                <option value="6–7">6–7 hours</option>
+                <option value="8-10">8-10 hours</option>
+                <option value="11+">11+ hours</option>
+              </select>
+            </div>
+          
+            <p class="fst-italic">If sleep didn’t go well, that’s okay. Today is a new chance to rest well.</p>
+        </section>
+
+        <!-- brain dump -->
+        <section class="container my-5 text-center">
+            <h2>Brain Dump</h2>
+            <h5 class="fst-italic">What’s on your mind today?</h5>
+          
+            <div class="mb-4">
+              <textarea class="form-control" rows="4" placeholder="Doesn’t have to make sense or be well-written. This is just for you."></textarea>
+            </div>
+          </section>
+          
+
+        <!-- gratitude -->
+        <section class="container my-5 text-center">
+            <h2>Gratitude Shop</h2>
+            <p class="fst-italic">Little joys matter. Take a moment to name what brought you light today.</p>
+            <p>We’ll add this to your <em>Joy Bubble</em> so you can look back on it :)</p>
+          
+            <div class="mb-4">
+              <input type="text" class="form-control mb-2" name="gratitude1" placeholder="I'm grateful for...">
+              <input type="text" class="form-control mb-2" name="gratitude2" placeholder="Another thing...">
+              <input type="text" class="form-control mb-2" name="gratitude3" placeholder="And one more...">
+            </div>
+    
+            <button type="button" class="btn btn-secondary px-5">+ Add More Gratitude Entries
+            </button>
+          </section>
+    </section>
+
+    <section class="text-center my-5" id="finish-checkin">
+        <a href="finish.html" class="btn px-4 py-3 finish-btn">Finish</a>
+    </section>
+
+  </main>
+</body>
+</html>
