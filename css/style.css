@@ -152,8 +152,26 @@ textarea.form-control {
   color: #FFF6C6;
 }
 
+.bg-cream {
+    background-color: #FFF6C6;
+}
+
+.text-white {
+    color: #FFFBED;
+  }
+
 .text-dark-green {
   color: #42583D;
+}
+
+.bubble {
+    background-color: #C9E6F8;
+    color: #42583D;
+    padding: 1.2rem 1.8rem;
+    border-radius: 999px;
+    font-weight: 400;
+    font-size: 1.1rem;
+    display: inline-block;
 }
 
 /* --images -- */
@@ -167,6 +185,16 @@ textarea.form-control {
     max-height: 1000px;
     margin-top: -3rem;
     margin-bottom: -7rem;
+}
+
+.pond-img {
+    max-height: 1000px;
+    margin-top: -7rem;
+    margin-bottom: -10rem;
+}
+
+.bubble-img {
+    max-height: 1000px;
 }
 
 section {
