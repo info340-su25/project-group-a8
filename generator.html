@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Kristina Tran">
+    <meta name="description" content="Unfold - One Small Shift Generator for student wellness.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unfold – One Small Shift Generator</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+</head>
+
+<body>
+    <header>
+        <h1>Unfold</h1>
+        <nav>
+            <a href="index.html">Home</a> |
+            <a href="tracker.html">Wellness Tracker</a> |
+            <a href="generator.html">Shift Generator</a> |
+            <a href="forecast.html">Forecast</a> |
+            <a href="reset-room.html">Reset Room</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="intro-section">
+            <h2>One Small Shift Generator</h2>
+            <p>Discover and collect small offline activities to support your wellness journey. Pick an idea from our curated cards, add your own, and generate your next micro habit to try today.</p>
+        </section>
+
+        <section class="cards-section">
+            <h3>Idea Cards</h3>
+            <div class="card-grid">
+                <div class="idea-card">🌿 Take a 5-minute nature walk</div>
+                <div class="idea-card">🧘‍♀️ Stretch for 2 minutes</div>
+                <div class="idea-card">📓 Write 3 things you’re grateful for</div>
+                <div class="idea-card">🍵 Drink tea without your phone</div>
+                <div class="idea-card">🎶 Listen to a song with full attention</div>
+                <div class="idea-card">💧 Drink a glass of water slowly</div>
+            </div>
+        </section>
+
+        <section class="generator-section">
+            <h3>Run Generator</h3>
+            <button id="run-generator-btn">🎲 Run Generator</button>
+            <p id="generator-result">✨ Your next small shift will appear here!</p>
+        </section>
+
+        <section class="my-list-section">
+            <h3>My List</h3>
+            <p>Drag your chosen ideas here to build your personalized wellness plan (static for now).</p>
+            <div class="my-list-droparea">
+                <div class="list-card">🧘‍♀️ Stretch for 2 minutes</div>
+                <div class="list-card">🍵 Drink tea without your phone</div>
+            </div>
+        </section>
+
+        <section class="add-idea-section">
+            <h3>Add Your Own Idea</h3>
+            <form>
+                <label for="new-idea-input">Your Idea:</label>
+                <input type="text" id="new-idea-input" name="new-idea-input" placeholder="Enter your small shift idea" />
+                <button type="submit">Add Idea</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Unfold | Group A8 | University of Washington</p>
+    </footer>    
+</body>
+</html>
