@@ -223,8 +223,28 @@ img.img-fluid {
 }
 
 .quiz input{
-  margin-bottom: 10rem;
+  margin-bottom: 5rem;
 }
-.quiz input.range{
-  size: 5rem;
+.quiz label{
+  font-size: 2rem;
+}
+.quiz [type=range] {
+  width: 500px;
+}
+.quiz [type=text] {
+  width: 500px;
+  border-radius: 12px;
+  color: #42583D;
+}
+.quiz [type=button] {
+  width: 15rem;
+  height: 3rem;
+  border-radius: 12px;
+  background-color:#FFFBED;
+  color:#42583D;
+}
+.quiz [type=color] {
+  width: 10rem;
+  height: 10rem;
+  margin-bottom: 15rem;
 }
