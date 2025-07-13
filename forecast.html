@@ -22,14 +22,61 @@
         <button class="btn menu-toggle" aria-label="Menu">&#9776;</button>
     </header>
     <main class="container py-4">
-        <section class="quiz text-center mb-4">
+        <section class="forecast text-center mb-4">
             <h1>Thankfulness Forecast</h1>
             <h2>What are you thankful for today?</h2>
             
             <div class="character">
                 <img src="img/pixelBear.png" alt="Pixel Bear illustration" class="pixelBear py-4" style="height: 150px;">
             </div>
-        
+            
+            <div class="quiz">
+                <div class="Q1">
+                    <p>How do you feel today?</p>
+                    <input type="range" min="0" max="10" list="values" >
+                    <datalist id="values">
+                        <option value="0" label="Sad"></option> 
+                        <option value="5" label="Fine"></option> 
+                        <option value="10" label="Happy"></option> 
+                    </datalist>
+                </div>
+                <div class="Q2">
+                    <p>Have you thought about something you are thankful for today?</p>
+                    <label for="true">Yes</label>
+                    <input type="radio" id="true" size="500">
+                    <label for="false">No</label>
+                    <input type="radio" id="false">
+                </div>
+                <div class="Q3">
+                    <p>What are 3 things you are thankful for today?</p>
+                    <label for="one">1.</label>
+                    <input type="text" id="one"><br>
+                    <label for="two">2.</label>
+                    <input type="text" id="two"><br>
+                    <label for="three">3.</label>
+                    <input type="text" id="three"><br>
+                </div>
+                <div class="Q4">
+                    <p>What are some things you want to do this week?</p>
+                    <input type="button" value="Go Outside" id="outside">
+                    <input type="button" value="Bake/Cook" id="kitchen">
+                    <input type="button" value="Do Art" id="art">
+                    <input type="button" value="Go Somewhere New" id="travel">
+                    <input type="button" value="Read a book" id="book">
+                    <input type="button" value="Self Care" id="care">
+                    <input type="button" value="Write" id="pen">
+                    <input type="button" value="Hang Out With Friends" id="friends">
+                    <input type="button" value="Other" id="other">
+                </div>
+                <div class="Q5">
+                    <p>Pick Color of the Day!</p>
+                    <input type="color" id="color-of-the-day">
+                </div>
+
+                <div class="submit">
+                    <input type="submit" value="Forecast My Day" id="submit">
+                </div>
+            </div>
         
         
         </section>

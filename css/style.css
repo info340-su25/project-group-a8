@@ -213,3 +213,18 @@ img.img-fluid {
   margin-left: auto;
   margin-right: auto;
 }
+
+.quiz p{
+  font-size: 2.5rem;
+  text-align: center;
+  border: thick double #f8efb2;
+  margin-top: 5rem;
+  margin-bottom: 10rem;
+}
+
+.quiz input{
+  margin-bottom: 10rem;
+}
+.quiz input.range{
+  size: 5rem;
+}
