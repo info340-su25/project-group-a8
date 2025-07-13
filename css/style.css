@@ -228,6 +228,10 @@ img.img-fluid {
 .quiz label{
   font-size: 2rem;
 }
+.Q1 label{
+  margin-right: 75px;
+  margin-left:75px;
+}
 .quiz [type=range] {
   width: 500px;
 }
@@ -247,4 +251,11 @@ img.img-fluid {
   width: 10rem;
   height: 10rem;
   margin-bottom: 15rem;
+}
+.quiz [type=submit] {
+  width: 15rem;
+  height: 5rem;
+  border-radius: 12px;
+  background-color:#FFFBED;
+  color:#42583D;
 }
