@@ -105,6 +105,16 @@ p, label, span, select, textarea, input {
     font-size: 1.5rem;
 }
 
+.action-btn {
+  background-color: #FFF6C6;
+  color: #C5D1EE;   
+  border: 1px dashed #C5D1EE; 
+  border-radius: 1rem;
+  padding: 1rem 1rem;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
 /* --header-- */
 .menu-toggle {
   font-size: 2.4rem;
@@ -265,4 +275,83 @@ img.img-fluid {
   height: auto;
   margin-top: 15rem;
   margin-bottom: 15rem;
+}
+
+.idea-pool {
+  text-align: center;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card {
+  background-color: #FFF6C6;
+  color: #42583D;   
+  border: 4px dashed #C5D1EE; 
+  border-radius: 1.5rem;
+  padding: 1rem;
+  font-weight: 400;
+  font-size: 1.5rem;
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 600px) {
+  h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .card {
+    font-size: 1.1rem;
+    padding: 0.75rem;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr; /* Force single column for small screens */
+  }
+
+  .cute-lil-bear-img {
+    max-height: 300px;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .generate-btn {
+    width: 100%;
+  }
+}
+
+
+@media (min-width: 1000px) {
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .idea-pool {
+    padding: 2rem 4rem;
+  }
+
+  .custom-idea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .custom-idea input {
+    width: 60%;
+  }
 }
