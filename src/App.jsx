@@ -157,7 +157,7 @@ function App() {
   ];
   
   return (
-    <div className="App min-vh-100">
+    <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route 

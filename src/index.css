@@ -101,6 +101,17 @@ p, label, span, select, textarea, input {
     font-size: 1.5rem !important;
 }
 
+.dropdown-toggle {
+    background-color: #FFF6C6 !important;
+    color: #C5D1EE !important;   
+    border: 4px dashed #C5D1EE !important; 
+    border-radius: 1.5rem !important;
+    font-weight: 200 !important;
+    font-size: 1.5rem !important;
+    padding: 1rem 2rem !important;
+    margin: 2rem 2rem;
+}
+
 .joy-btn {
     background-color: #FFF6C6;
     color: #C5D1EE;   
@@ -198,7 +209,7 @@ textarea.form-control {
 }
 
 .cute-lil-bear-img {
-    max-height: 1500px;
+    max-height: 500px;
     margin-top: -2rem !important;
     margin-bottom: -4rem !important;
 }

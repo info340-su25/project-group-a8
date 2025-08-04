@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 export default function Tracker() {
 
@@ -338,18 +339,21 @@ export default function Tracker() {
                                     </div>
                                 
                                     <div className="mb-4">
-                                    <label htmlFor="sleepHours" className="form-label">How many hours of sleep did you get?</label>
-                                    <select className="form-select" id="sleepHours" name="sleepHours" value={sleep.hours}
-                                    onChange={(event) =>
-                                        setSleep({ ...sleep, hours: event.target.value })
-                                    }>
-                                        <option value="" disabled>Select</option>
-                                        <option value="0-3">0-3 hours</option>
-                                        <option value="4-5">4-5 hours</option>
-                                        <option value="6-7">6-7 hours</option>
-                                        <option value="8-10">8-10 hours</option>
-                                        <option value="11+">11+ hours</option>
-                                    </select>
+                                        <label htmlFor="sleepHours" className="form-label">How many hours of sleep did you get?</label>
+                                         <Dropdown onSelect = {(event) => {
+                                                setSleep({ ...sleep, hours: event })}}>
+                                            <Dropdown.Toggle className = 'dropdown-toggle' variant="light" id="sleep-hours">
+                                                {sleep.hours || 'Select'}
+                                            </Dropdown.Toggle>
+
+                                            <Dropdown.Menu>
+                                                <Dropdown.Item eventKey="0-3">0-3 hours</Dropdown.Item>
+                                                <Dropdown.Item eventKey="4-5">4-5 hours</Dropdown.Item>
+                                                <Dropdown.Item eventKey="6-7">6-7 hours</Dropdown.Item>
+                                                <Dropdown.Item eventKey="8-10">8-10 hours</Dropdown.Item>
+                                                <Dropdown.Item eventKey="11+">11+ hours</Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
                                     </div>
                                 
                                     <p className="fst-italic">If sleep didn't go well, that's okay. Today is a new chance to rest well.</p>
