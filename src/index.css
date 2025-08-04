@@ -47,7 +47,7 @@ h5, h6 {
 }
 
 p, label, span, select, textarea, input {
-  font-weight: 200;
+  font-weight: 200 !important;
   font-style: normal;
   color: #FFF6C6;
 }
@@ -59,14 +59,21 @@ p, label, span, select, textarea, input {
 }
 
 .checkin-btn {
-  background-color: #FFF6C6;
-  color: #42583D;
-  border: none;
+  background-color: #FFF6C6 !important;
+  color: #42583D !important;
+  border: 5px dashed #C5D1EE !important;
+}
+
+.gratitude-btn,
+.gratitude-btn:focus,
+.gratitude-btn:active,
+.gratitude-btn:hover {
+  color: #FFF6C6 !important;
 }
 
 .checkin-btn:hover {
-  background-color: #f8efb2;
-  color: #42583D;
+  background-color: #f8efb2 !important;
+  color: #42583D !important;
 }
 
 .bubble-btn {
@@ -85,14 +92,13 @@ p, label, span, select, textarea, input {
 }
 
 .finish-btn {
-    background-color: #FFF6C6;
-    color: #C5D1EE;   
-    border: 4px dashed #C5D1EE; 
-    border-radius: 1.5rem;
-    padding: 2rem 5rem;
-    margin-top: -10rem;
-    font-weight: 700;
-    font-size: 1.5rem;
+    background-color: #FFF6C6 !important;
+    color: #C5D1EE !important;   
+    border: 4px dashed #C5D1EE !important; 
+    border-radius: 1.5rem !important;
+    padding: 2rem 5rem !important;
+    font-weight: 700 !important;
+    font-size: 1.5rem !important;
 }
 
 .joy-btn {
@@ -192,9 +198,9 @@ textarea.form-control {
 }
 
 .cute-lil-bear-img {
-    max-height: 1000px;
-    margin-top: -3rem;
-    margin-bottom: -7rem;
+    max-height: 1500px;
+    margin-top: -2rem !important;
+    margin-bottom: -4rem !important;
 }
 
 .pond-img {

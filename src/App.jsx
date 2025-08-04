@@ -5,6 +5,7 @@ import About from './components/About.jsx';
 import Forecast from './components/Forecast.jsx';
 import Gallery from './components/Gallery.jsx';
 import Proposal from './components/Proposal';
+import './index.css';
 
 function App() {
   const sampleMoodEntries = [
@@ -156,34 +157,32 @@ function App() {
   ];
   
   return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route 
-            path="/tracker" 
-            element={<Tracker moodEntries={sampleMoodEntries} />} 
-          />
-          <Route 
-            path="/forecast" 
-            element={<Forecast />} 
-          />
-          <Route 
-            path="/gallery" 
-            element={<Gallery joyMoments={sampleJoyMoments} />} 
-          />
-          <Route 
-            path="/about" 
-            element={<About />} 
-          />
-          <Route 
-            path="/proposal" 
-            element={<Proposal />} 
-          />
+    <div className="App min-vh-100">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route 
+          path="/tracker" 
+          element={<Tracker moodEntries={sampleMoodEntries} />} 
+        />
+        <Route 
+          path="/forecast" 
+          element={<Forecast />} 
+        />
+        <Route 
+          path="/gallery" 
+          element={<Gallery joyMoments={sampleJoyMoments} />} 
+        />
+        <Route 
+          path="/about" 
+          element={<About />} 
+        />
+        <Route 
+          path="/proposal" 
+          element={<Proposal />} 
+        />
       </Routes>
     </div>
-    </Router>
-  );
+  );  
 }
 
 export default App;
