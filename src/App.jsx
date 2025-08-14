@@ -11,7 +11,7 @@ function App() {
   const sampleMoodEntries = [
     {
       id: 1,
-      date: "2025-08-02",
+      date: "2025-08-15",
       mood: "Content",
       energy: 7,
       sleep: 8,
@@ -19,7 +19,7 @@ function App() {
     },
     {
       id: 2,
-      date: "2025-08-01",
+      date: "2025-08-14",
       mood: "Anxious",
       energy: 5,
       sleep: 6,
@@ -27,7 +27,7 @@ function App() {
     },
     {
       id: 3,
-      date: "2025-07-31",
+      date: "2025-08-13",
       mood: "Happy",
       energy: 9,
       sleep: 8,
@@ -35,11 +35,35 @@ function App() {
     },
     {
       id: 4,
-      date: "2025-07-30",
+      date: "2025-08-12",
       mood: "Neutral",
       energy: 6,
       sleep: 7,
       thoughts: "Just an ordinary day, nothing special but nothing bad either."
+    },
+    {
+      id: 5,
+      date: "2025-08-11",
+      mood: "Stressed",
+      energy: 4,
+      sleep: 5,
+      thoughts: "Lots of deadlines this week, feeling the pressure."
+    },
+    {
+      id: 6,
+      date: "2025-08-10",
+      mood: "Happy",
+      energy: 8,
+      sleep: 9,
+      thoughts: "Weekend was refreshing, caught up on sleep and relaxation."
+    },
+    {
+      id: 7,
+      date: "2025-08-09",
+      mood: "Content",
+      energy: 7,
+      sleep: 8,
+      thoughts: "Steady day, making good progress on my goals."
     }
   ];
 
@@ -91,7 +115,7 @@ function App() {
     }
   ];
 
-   const sampleTeamMembers = [
+  const sampleTeamMembers = [
     {
       id: 1,
       name: "Kristina",
@@ -131,7 +155,7 @@ function App() {
       title: "Emotional Forecast",
       description: "Visual representation of emotional patterns and trends over time",
       priority: "Medium",
-      status: "Planned"
+      status: "In Progress"
     },
     {
       id: 3,
@@ -166,10 +190,10 @@ function App() {
         />
         <Route 
           path="/forecast" 
-          element={<Forecast />} 
+          element={<Forecast moodEntries={sampleMoodEntries} />} 
         />
         <Route 
-          path="/gallery" 
+          path="/joy" 
           element={<Gallery joyMoments={sampleJoyMoments} />} 
         />
         <Route 
@@ -178,7 +202,7 @@ function App() {
         />
         <Route 
           path="/proposal" 
-          element={<Proposal />} 
+          element={<Proposal teamMembers={sampleTeamMembers} features={sampleFeatures} />} 
         />
       </Routes>
     </div>
@@ -186,4 +210,3 @@ function App() {
 }
 
 export default App;
-
