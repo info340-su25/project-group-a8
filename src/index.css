@@ -2,9 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,200;0,300;0,400;0,600;1,400;1,600&display=swap');
 
 body {
-  font-family: 'Fraunces', serif;
-  background-color: #42583D;
-  color: #FFF6C6;
+  font-family: 'Fraunces', serif !important;
+  background-color: #42583D !important;
+  color: #FFF6C6 !important;
 }
 
 h1 {
@@ -113,23 +113,23 @@ p, label, span, select, textarea, input {
 }
 
 .joy-btn {
-    background-color: #FFF6C6;
-    color: #C5D1EE;   
-    border: 4px dashed #C5D1EE; 
-    border-radius: 1.5rem;
-    padding: 2rem 2rem;
-    font-weight: 700;
-    font-size: 1.5rem;
+    background-color: #FFF6C6 !important;
+    color: #C5D1EE !important;   
+    border: 4px dashed #C5D1EE !important; 
+    border-radius: 1.5rem !important;
+    padding: 2rem 2rem !important;
+    font-weight: 700 !important;
+    font-size: 1.5rem !important;
 }
 
 .action-btn {
-  background-color: #FFF6C6;
-  color: #C5D1EE;   
-  border: 1px dashed #C5D1EE; 
-  border-radius: 1rem;
-  padding: 1rem 1rem;
-  font-weight: 400;
-  font-size: 1rem;
+  background-color: #FFF6C6 !important;
+  color: #C5D1EE !important;   
+  border: 1px dashed #C5D1EE !important; 
+  border-radius: 1rem !important;
+  padding: 1rem 1rem !important;
+  font-weight: 400 !important;
+  font-size: 1rem !important;
 }
 
 /* --header-- */
@@ -210,8 +210,8 @@ textarea.form-control {
 
 .cute-lil-bear-img {
     max-height: 500px;
-    margin-top: -2rem !important;
-    margin-bottom: -4rem !important;
+    margin-top: -5rem !important;
+    margin-bottom: -10rem !important;
 }
 
 .pond-img {

@@ -1,4 +1,4 @@
-export default function Gallery({ joyMoments }) {
+export default function JoyBubble({ joyMoments }) {
     const defaultJoyMoments = joyMoments || [
         {
             id: 1,

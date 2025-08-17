@@ -3,7 +3,7 @@ import Home from './components/Home.jsx';
 import Tracker from './components/Tracker';
 import About from './components/About.jsx';
 import Forecast from './components/Forecast.jsx';
-import Gallery from './components/Gallery.jsx';
+import JoyBubble from './components/JoyBubble.jsx';
 import Proposal from './components/Proposal';
 import './index.css';
 
@@ -159,7 +159,7 @@ function App() {
     },
     {
       id: 3,
-      title: "Joy Bubble Gallery",
+      title: "Joy Bubble",
       description: "Collection space for positive moments, gratitude, and achievements",
       priority: "Medium",
       status: "Planned"
@@ -194,7 +194,7 @@ function App() {
         />
         <Route 
           path="/joy" 
-          element={<Gallery joyMoments={sampleJoyMoments} />} 
+          element={<JoyBubble joyMoments={sampleJoyMoments} />} 
         />
         <Route 
           path="/about" 

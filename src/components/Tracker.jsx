@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { useNavigate } from "react-router";
 
 export default function Tracker() {
 
@@ -20,10 +21,43 @@ export default function Tracker() {
 
             const [gratitudeEntries, setGratitudeEntries] = useState(["" , "" , ""]);
 
+            const [checkins, setCheckins] = useState([]);
+
+
+            const nav = useNavigate();
+
+            
+            const gratitudeInputs = gratitudeEntries.map((entry, index) => {
+                let placeholder;
+                if (index === 0) {
+                placeholder = "I'm grateful for...";
+                } else {
+                placeholder = "Another thing...";
+                }
+                return (<input key={index} name={`gratitude${index + 1}`} type="text" className="form-control mb-2" placeholder={placeholder} value={entry} onChange={(e) => {
+                      const next = [...gratitudeEntries];
+                      next[index] = e.target.value;
+                      setGratitudeEntries(next);
+                    }}/>
+                );});
+
             const handleSubmit = (event) => {
-                event.preventDefault()
-                const checkinData = {mood, socialBattery : socialBatterySlider, socialPlans, screenTime, digitalHabits, mindSpace, sleep, brainDump, gratitudeEntries};
+                event.preventDefault();
+
+                const overallScore = Math.round(
+                    (mood.energy + (10 - mood.stress) + mood.excitement + mood.overallMood + mindSpace.clarity + mindSpace.selfLove + mindSpace.positivity + sleep.restfulness) / 8
+                );
+
+
+                const checkinData = {createdAt: Date.now(), mood, socialBattery : socialBatterySlider, socialPlans, screenTime, digitalHabits, mindSpace, sleep, brainDump, gratitudeEntries: gratitudeEntries.filter(Boolean), overallScore};
                 console.log(checkinData);
+
+                setCheckins(prev => [{ id: crypto.randomUUID(), ...checkinData }, ...prev]);
+
+                setBrainDump('');
+                setGratitudeEntries(['' , '' , '']);
+
+                nav("/joy", {state:{gratitude : gratitudeEntries.filter(Boolean) , from: "tracker", createdAt: Date.now() }});
             }
 
             return (
@@ -39,27 +73,28 @@ export default function Tracker() {
 
                     <main className="container py-4">
                         <div className="text-center mb-4">
-                        <h2>Hi, {username}</h2>
-                        <h3>How are you feeling today?</h3>
+                            <h2>Hi, {username}</h2>
+                            <h3>How are you feeling today?</h3>
 
-                        <div className="d-flex justify-content-center my-3">
-                            <h4>
-                                <a href="#checkin" className="btn checkin-btn px-4 py-4">
-                                    Complete Daily Check-In
-                                </a>
-                            </h4>
-                        </div>
+                            <div className="d-flex justify-content-center my-3 mt-5">
+                                <h4>
+                                    <a href="#checkin" className="btn checkin-btn px-4 py-4">
+                                        Complete Daily Check-In
+                                    </a>
+                                </h4>
+                            </div>
 
-                        <div className="d-flex justify-content-center">
-                            <img src="/img/cute_lil_bear.png" alt="Cute bear illustration" className="img-fluid cute-lil-bear-img" />
-                        </div>
+                            <div className="d-flex justify-content-center">
+                                <img src="/img/cute_lil_bear.png" alt="Cute bear illustration" className="img-fluid cute-lil-bear-img" />
+                            </div>
 
-                        <h3 className="mt-3">Noticing how you feel today can help you care for tomorrow.</h3>
+                            <h3 className="mt-3 py-4">Noticing how you feel today can help you care for tomorrow.</h3>
                         </div>
 
                         <form onSubmit = {handleSubmit}>
+
                             <div id="checkin" className="container my-5">
-                                <div className="mb-5 text-center">
+                                <div className="mb-5 py-2 text-center">
                                 <h2>Mood</h2>
                             
                                 <div className="mb-4 mt-5">
@@ -377,21 +412,7 @@ export default function Tracker() {
                                 
                                     <div className="mb-4">
 
-                                        {gratitudeEntries.map((entry , index) => {
-                                            let placeholder = '';
-                                            if (index === 0) {
-                                                placeholder = "I'm grateful for...";
-                                            } else {
-                                                placeholder = "Another thing...";
-                                            }
-                                            return (<input key={index} name={`gratitude${index + 1}`} type="text" className="form-control mb-2" placeholder={placeholder} value={entry}
-                                                    onChange={(e) => {
-                                                        const newEntries = [...gratitudeEntries];
-                                                        newEntries[index] = e.target.value;
-                                                        setGratitudeEntries(newEntries);
-                                                    }}
-                                                />
-                                            );})}
+                                        {gratitudeInputs}
 
                                         <button type="button" className="btn px-5 pb-5 pt-2 text-cream gratitude-btn" onClick={() => setGratitudeEntries([...gratitudeEntries , ''])}>+ Add More Gratitude Entries</button>
                                         <button type="submit" className="btn finish-btn pt-10">Finish Check-In</button>

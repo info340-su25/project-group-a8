@@ -18,11 +18,11 @@ return (
             </header>
 
             {/* Main Content */}
-            <main className="container-fluid">
+            <main className="container-fluid ">
                 {/* Hero Section */}
                 <section className="hero-section text-center py-5">
                     <div className="container">
-                        <h1 className="display-3 fw-bold mb-4">Welcome to Unfold</h1>
+                        <h1 className="display-3 fw-bold mb-4 text-cream">Welcome to Unfold</h1>
                         <p className="lead mb-5">Your digital wellness garden for reflection, growth, and joy</p>
                         
                         <div className="d-flex justify-content-center mb-5">
@@ -45,7 +45,7 @@ return (
                                         <h3 className="text-dark-green">Daily Check-In</h3>
                                     </div>
                                     <p className="text-muted mb-4 text-center">Track your mood, energy, sleep, and thoughts. Small moments of reflection can lead to big insights.</p>
-                                    <a href="/tracker" className="btn btn-outline action-btn w-100">Start Tracking</a>
+                                    <a href="/tracker" className="btn btn-outline action-btn action-btn w-100">Start Tracking</a>
                                 </div>
                             </div>
                             
@@ -119,7 +119,7 @@ return (
             </main>
 
             {/* Footer */}
-            <footer className="bg-dark text-light py-4 mt-5">
+            <footer className="bg-dark-green text-cream py-4 mt-5">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-6">
