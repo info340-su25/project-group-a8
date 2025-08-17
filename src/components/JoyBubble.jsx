@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
+import FloatingBubbles from './components/FloatingBubbles.jsx';
 
 export default function JoyBubble() {
-  // state for all saved moments
   const [moments, setMoments] = useState([]);
 
   const [title, setTitle] = useState("");
@@ -19,53 +19,52 @@ export default function JoyBubble() {
       localStorage.setItem( "unfold_joy_moments" , JSON.stringify(event));
     } catch {}};
 
+// used chatgpt for understanding/writing local storage try/catch and saving moments after page refresh
+
   useEffect( () => {
     const event = localStorage.getItem("unfold_joy_moments");
     if (event) {
       try {setMoments(JSON.parse(event));} catch {}}}, [] );
 
+    // used chatgpt for understanding/writing local storage try/catch and saving moments after page refresh
   useEffect(() => {
     let incoming;
 
     if ( location.state && location.state.newMoments ) {
-    incoming = location.state.newMoments;
+        incoming = location.state.newMoments;
     } else {
-    incoming = []};
+        incoming = []
+    };
 
     if (incoming && Array.isArray(incoming) && incoming.length > 0) {
       const currentDate = new Date().toISOString().slice(0 , 10);
-      const mapped = incoming.filter(Boolean).map((text) => ({ 
-        id: crypto.randomUUID(),
-        title: text,
-        description: "",
-        date: currentDate,
-        category: "Gratitude"}));
+      const mapped = incoming.filter(Boolean).map((text) => ({ id: crypto.randomUUID(), title: text, description: "", date: currentDate, category: "Gratitude"}));
+      // used chatgpt to get ID (using crypto + randomUUID)
       const newMoments = [...mapped, ...moments];
       saveMoments(newMoments);
       setStatus({ type: "success" , msg: "Gratitude added to your Joy Bubble!"});
     }}, [location.state] );
 
   const handleAdd = (event) => {
-    event.preventDefault();
+        event.preventDefault();
 
-    if (!title.trim()) {
-      setStatus({ type: "error" , msg: "Please add a title." });
-      return;
-    }
-    if (!category) {
-      setStatus({ type: "error", msg: "Please choose a category." });
-      return;
-    }
-    const currDate = new Date().toISOString().slice(0, 10);
-    const newMoment = { id: crypto.randomUUID(), title: title.trim(), description: description.trim(), date: currDate, category};
-
-    const updateMoment = [newMoment, ...moments];
-    saveMoments(updateMoment);
-
-    setTitle('');
-    setCategory("");
-    setDescription("");
-    setStatus({ type: "success" , msg: "Added to your Joy Bubble!" });
+        if (!title.trim()) {
+        setStatus({ type: "error" , msg: "Please add a title." });
+        return;
+        }
+        if (!category) {
+        setStatus({ type: "error", msg: "Please choose a category." });
+        return;
+        }
+        const currDate = new Date().toISOString().slice(0, 10);
+        const newMoment = { id: crypto.randomUUID(), title: title.trim(), description: description.trim(), date: currDate, category};
+        // used chatgpt to get ID (using crypto + randomUUID)
+        const updateMoment = [newMoment, ...moments];
+        saveMoments(updateMoment);
+        setTitle('');
+        setCategory("");
+        setDescription("");
+        setStatus({ type: "success" , msg: "Added to your Joy Bubble!" });
   };
 
   const collectionCards = useMemo( () =>
@@ -74,7 +73,7 @@ export default function JoyBubble() {
           <div className="joy-card h-100 p-4 rounded shadow-sm bg-light-green">
             <div className="joy-header d-flex align-items-center mb-3">
               <div>
-                <h5 className="text-dark-green mb-1">{m.title}</h5>
+                <h5 className="text-dark-green mb-1">{moment.title}</h5>
                 <small className="text-muted">{moment.date}</small>
               </div>
             </div>
@@ -95,6 +94,7 @@ export default function JoyBubble() {
       categories.set(moment.category, (categories.get(moment.category) || 0) + 1)
     );
     const topCategory = [...categories.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] || "—";
+    // used chatgpt for calculating topCategory & getting moments ^^
     return { total, topCategory };}, [moments]);
 
   return (
@@ -111,10 +111,9 @@ export default function JoyBubble() {
           <Link to="/forecast" className="nav-link">Forecast</Link>
           <Link to="/about" className="nav-link">About</Link>
           <Link to="/reflection" className="nav-link">Reflection Pond</Link>
+          <Link to="/joy" className="nav-link">Joy Bubble</Link>
         </nav>
-        <button className="btn menu-toggle d-md-none" aria-label="Menu">
-          &#9776;
-        </button>
+        <button className="btn menu-toggle d-md-none" aria-label="Menu">&#9776;</button>
       </header>
 
       <main className="container-fluid">
@@ -124,21 +123,19 @@ export default function JoyBubble() {
             <p className="lead mb-5">Collect and revisit moments of gratitude and joy</p>
 
             <div className="d-flex justify-content-center mb-5">
-              <img
-                src="img/bubble_img.png"
-                alt="Joy bubble illustration"
-                className="img-fluid bubble-img"
-                style={{ maxHeight: "400px" }}
-              />
+              <img src="img/bubble.png" alt="Joy bubble illustration" className="img-fluid bubble-img" style={{maxHeight: "400px"}}/>
             </div>
-            <p className="fs-5 mb-0">Let the light in — you made this.</p>
+            <h3 className="fs-5 mb-0">Let the light in — you made this.</h3>
           </div>
         </section>
 
         <section className="py-5">
-          <div className="container">
+        <div className="container mb-20" style={{ backgroundColor: "#C5D1EE" , borderRadius: "12px", boxShadow: "4px 4px 8px 4px rgba(0, 0, 0, 0.5)" , padding: '30px'}}>
             <h2 className="text-center mb-5">Your Joy Collection</h2>
-
+            <div style={{ position: "relative", minHeight: "100vh" }}>
+                {/* Background bubbles */}
+                <FloatingBubbles count={18} />
+            </div>
             {status.msg && (
               <div
                 role="status"
@@ -245,18 +242,14 @@ export default function JoyBubble() {
                       </div>
 
                       <div className="col-12 text-center">
-                        <button type="submit" className="btn action-btn">
-                          Add to Joy Bubble
-                        </button>
+                        <button type="submit" className="btn action-btn">Add to Joy Bubble</button>
                       </div>
                     </div>
                   </form>
                 </div>
 
                 <div className="text-center mt-3">
-                  <Link to="/tracker" className="btn btn-outline action-btn">
-                    Go to Daily Check-In
-                  </Link>
+                  <Link to="/tracker" className="btn btn-outline action-btn">Go to Daily Check-In</Link>
                 </div>
               </div>
             </div>
