@@ -33,7 +33,7 @@ return (
                 </section>
 
                 {/* Features Section */}
-                <section className="features-section py-5 bg-cream">
+                <section className="features-section py-10 pb-5 bg-cream">
                     <div className="container">
                         <h2 className="text-center mb-5">How to Unfold</h2>
                         <div className="row g-4">
@@ -48,16 +48,6 @@ return (
                                 </div>
                             </div>
                             
-                            <div className="col-md-6 col-lg-4">
-                                <div className="feature-card h-100 p-4 rounded shadow-sm bg-white">
-                                    <div className="text-center mb-3">
-                                        <div className="feature-icon mb-3">✨</div>
-                                        <h3 className="text-dark-green">One Small Shift</h3>
-                                    </div>
-                                    <p className="text-muted mb-4 text-center">Discover micro-habits and offline activities. Sometimes the smallest changes make the biggest difference.</p>
-                                    <a href="/generator" className="btn btn-outline action-btn w-100">Generate Ideas</a>
-                                </div>
-                            </div>
                             
                             <div className="col-md-6 col-lg-4">
                                 <div className="feature-card h-100 p-4 rounded shadow-sm bg-white">
@@ -81,27 +71,8 @@ return (
                                 </div>
                             </div>
                             
-                            <div className="col-md-6 col-lg-4">
-                                <div className="feature-card h-100 p-4 rounded shadow-sm bg-white">
-                                    <div className="text-center mb-3">
-                                        <div className="feature-icon mb-3">🪞</div>
-                                        <h3 className="text-dark-green">Reflection Pond</h3>
-                                    </div>
-                                    <p className="text-muted mb-4 text-center">Look back on your journey and see how far you've come. Progress isn't always linear.</p>
-                                    <a href="/reflection" className="btn btn-outline action-btn w-100">Reflect</a>
-                                </div>
-                            </div>
                             
-                            <div className="col-md-6 col-lg-4">
-                                <div className="feature-card h-100 p-4 rounded shadow-sm bg-white">
-                                    <div className="text-center mb-3">
-                                        <div className="feature-icon mb-3">🕯️</div>
-                                        <h3 className="text-dark-green">Reset Room</h3>
-                                    </div>
-                                    <p className="text-muted mb-4 text-center">A calming digital space to breathe and reset when life feels overwhelming.</p>
-                                    <a href="/reset-room" className="btn btn-outline action-btn w-100">Enter Room</a>
-                                </div>
-                            </div>
+                        
                         </div>
                     </div>
                 </section>
@@ -112,7 +83,6 @@ return (
                         <h2 className="mb-4">Ready to begin your wellness journey?</h2>
                         <p className="lead mb-4">Start small. Start today. You deserve to unfold.</p>
                         <a href="/tracker" className="btn action-btn btn-lg me-3">Begin Check-In</a>
-                        <a href="/generator" className="btn btn-outline action-btn btn-lg">Get Inspiration</a>
                     </div>
                 </section>
             </main>

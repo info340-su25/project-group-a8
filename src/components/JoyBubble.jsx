@@ -18,9 +18,12 @@ export default function JoyBubble() {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleBubbleClick = (item) => {
-        const moment = typeof item === "string"
-            ? moments.find(mm => mm.title === item)
-            : item;
+        let moment;
+        if (typeof item === "string") {
+        moment = moments.find(mom => mom.title === item);
+        } else {
+        moment = item;
+        }
 
         if (moment) {
             setSelectedMoment(moment);
@@ -30,7 +33,7 @@ export default function JoyBubble() {
 
     useEffect(() => {
         if (!isOpen) return;
-        const onKey = (e) => { if (e.key === "Escape") setIsOpen(false); };
+        const onKey = (event) => { if (event.key === "Escape") setIsOpen(false); };
         window.addEventListener("keydown", onKey);
         return () => window.removeEventListener("keydown", onKey);
       }, [isOpen]);
@@ -41,7 +44,7 @@ export default function JoyBubble() {
     setMoments(event);
     try {
       localStorage.setItem( "unfold_joy_moments" , JSON.stringify(event));
-    } catch {}};
+    } catch {} };
 
 // used chatgpt for understanding/writing local storage try/catch and saving moments after page refresh
 
@@ -102,19 +105,11 @@ export default function JoyBubble() {
         return { total, topCategory };}, [moments]
     );
 
-    const bubbleTexts = moments.slice(0, 10).map(moment => (
-        <span key={moment.id} className="bubble-text">
-            {moment.title}
-        </span>
-        ));
-
   return (
     <div>
       <header className="d-flex justify-content-between align-items-center px-4 py-3 border-bottom">
         <div className="d-flex align-items-center">
-            <Link to="/" className="d-flex align-items-center text-decoration-
-            
-            ne">
+            <Link to="/" className="d-flex align-items-center text-decoration-ne">
                 <img src="/img/unfold_logo.png" alt="Unfold Logo" height="60" />
                 <span className="visually-hidden">Home</span>
             </Link>
@@ -160,8 +155,7 @@ export default function JoyBubble() {
                     <Link to="/tracker" className="btn action-btn mt-2">
                     Go to Daily Check-In
                     </Link>
-                </div>
-                )}
+                </div>)}
             </div>
             </div>
         </section>
@@ -176,7 +170,7 @@ export default function JoyBubble() {
               <div className="col-md-4">
                 <div className="stat-card p-4 rounded bg-light-green">
                   <h3 className="text-dark-green">{stats.total}</h3>
-                  <p className="text-dark-green mb-0">Joy Moments</p>
+                  <p className="text-dark-green mb-0 ">Joy Moments</p>
                 </div>
               </div>
               <div className="col-md-4">
@@ -188,7 +182,7 @@ export default function JoyBubble() {
               <div className="col-md-4">
                 <div className="stat-card p-4 rounded bg-light-green">
                   <h3 className="text-dark-green">✨</h3>
-                  <p className="text-dark-green mb-0">Keep Noticing the Little Things</p>
+                  <p className="text-dark-green mb-0">Give Yourself Grace. One Step At A Time.</p>
                 </div>
               </div>
             </div>
@@ -213,7 +207,7 @@ export default function JoyBubble() {
                           className="form-control"
                           placeholder="Give your joy moment a title..."
                           value={title}
-                          onChange={(e) => setTitle(e.target.value)}
+                          onChange={(event) => setTitle(event.target.value)}
                         />
                       </div>
 
@@ -225,7 +219,7 @@ export default function JoyBubble() {
                           id="joyCategory"
                           className="form-select"
                           value={category}
-                          onChange={(e) => setCategory(e.target.value)}
+                          onChange={(event) => setCategory(event.target.value)}
                         >
                           <option value="">Choose category</option>
                           <option value="Achievement">Achievement</option>
@@ -235,6 +229,7 @@ export default function JoyBubble() {
                           <option value="Simple Pleasures">Simple Pleasures</option>
                           <option value="Kindness">Kindness</option>
                           <option value="Gratitude">Gratitude</option>
+                          <option value="Family">Gratitude</option>
                         </select>
                       </div>
 
@@ -248,7 +243,7 @@ export default function JoyBubble() {
                           className="form-control"
                           placeholder="Describe this joyful moment..."
                           value={description}
-                          onChange={(e) => setDescription(e.target.value)}
+                          onChange={(event) => setDescription(event.target.value)}
                         />
                       </div>
 
