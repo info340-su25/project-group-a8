@@ -698,7 +698,7 @@ button:focus {
 }
 
 .meet-the-team .team-member {
-  text-align: center; /* Default desktop */
+  text-align: center;
 }
 
 .link-dark-green {
@@ -706,11 +706,24 @@ button:focus {
 }
 
 .meet-the-team .team-img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
+  display: block;
+  justify-content: center;
+  width: 100%;
+  max-width:250px;
+  height: auto; 
+  margin: 0 auto;
+  border-radius: 10%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0.5, 0.5);
+  border: 3px solid #FFF6C6;
 }
+
+.links {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 1rem !important;
+  margin-top: 1rem !important;
+}
+
 
 @media (max-width: 767px) {
   .meet-the-team .team-member {
