@@ -63,18 +63,16 @@ export default function Tracker() {
             return (
                 <div className="bg-green text-cream">
                     <header className="d-flex justify-content-between align-items-center px-4 py-3 border-bottom">
-                        <div className="d-flex align-items-center">
-                        <img src="img/unfold_logo.png" alt="Unfold Logo" height="60" />
-                            <span className="visually-hidden">Home</span>
-                                    </div>
-                                    <nav className="d-none d-md-flex gap-4">
-                                        <a href="/tracker" className="nav-link">Daily Check-In</a>
-                                        <a href="/generator" className="nav-link">Shift Generator</a>
-                                        <a href="/forecast" className="nav-link">Forecast</a>
-                                        <a href="/joy" className="nav-link">Joy Bubble</a>
-                                        <a href="/reflection" className="nav-link">Reflection Pond</a>
-                                    </nav>
-                                    <button className="btn menu-toggle d-md-none" aria-label="Menu">&#9776;</button>
+                        <img src="/img/unfold_logo.png" alt="Unfold Logo" height="60" />
+                        <nav className="d-none d-md-flex gap-4">
+                            <a href="/" className="nav-link">Home</a>
+                            <a href="/tracker" className="nav-link">Daily Check-In</a>
+                            <a href="/joy" className="nav-link">Joy Bubble</a>
+                            <a href="/generator" className="nav-link">Shift Generator</a>
+                            <a href="/forecast" className="nav-link">Forecast</a>
+                            
+                        </nav>
+                        <button className="btn menu-toggle d-md-none" aria-label="Menu">&#9776;</button>
                     </header>
 
                     <main className="container py-4">

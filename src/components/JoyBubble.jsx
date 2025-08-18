@@ -113,19 +113,22 @@ export default function JoyBubble() {
     <div>
       <header className="d-flex justify-content-between align-items-center px-4 py-3 border-bottom">
         <div className="d-flex align-items-center">
-        <img src="img/unfold_logo.png" alt="Unfold Logo" height="60" />
-            <span className="visually-hidden">Home</span>
-                    </div>
+            <Link to="/" className="d-flex align-items-center text-decoration-none">
+                <img src="/img/unfold_logo.png" alt="Unfold Logo" height="60" />
+                <span className="visually-hidden">Home</span>
+            </Link>
+        </div>
                     <nav className="d-none d-md-flex gap-4">
+                        <a href="/" className="nav-link">Home</a>
                         <a href="/tracker" className="nav-link">Daily Check-In</a>
+                        <a href="/joy" className="nav-link">Joy Bubble</a>
                         <a href="/generator" className="nav-link">Shift Generator</a>
                         <a href="/forecast" className="nav-link">Forecast</a>
-                        <a href="/joy" className="nav-link">Joy Bubble</a>
-                        <a href="/reflection" className="nav-link">Reflection Pond</a>
+                        
                     </nav>
                     <button className="btn menu-toggle d-md-none" aria-label="Menu">&#9776;</button>
     </header>
-
+    <JoyModal open={isOpen} moment={selectedMoment} onClose={() => setIsOpen(false)} />
       <main className="container-fluid">
         <section className="hero-section text-center py-5">
           <div className="container">
@@ -142,7 +145,7 @@ export default function JoyBubble() {
         <section>
             <div
                 className="container mb-100 rounded-4 shadow-lg "
-                style={{ backgroundColor: "#C5D1EE", borderRadius: "12px", boxShadow: "4px 4px 8px 4px rgba(0,0,0,0.5)", padding: "30px", position: "relative",  overflow: "none" , paddingBottom: '20rem' }} >
+                style={{ backgroundColor: "#C5D1EE", borderRadius: "12px", boxShadow: "4px 4px 8px 4px rgba(0,0,0,0.5)", padding: "30px", position: "relative",  overflow: "hidden" , paddingBottom: '20rem' }} >
 
                 <FloatingBubbles items={moments} onBubbleClick={handleBubbleClick} />
 
@@ -280,3 +283,32 @@ export default function JoyBubble() {
     </div>
   );
 }
+
+function JoyModal({ open, moment, onClose }) {
+    if (!open || !moment) return null;
+  
+    const stop = (event) => event.stopPropagation();
+  
+    return (
+      <div onClick={onClose} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0)", display: "flex", alignItems: "center", justifyContent: "center", padding: "1rem", zIndex: 9999 }} role="presentation" >
+        <div className = "emph-btn" onClick={stop} role="dialog" aria-modal="true" aria-labelledby="jb-modal-title" style={{ background: "#fff", borderRadius: 12, maxWidth: 640, width: "100%", boxShadow: "0 15px 40px rgba(0,0,0,0.3)", position: "relative", padding: "1.25rem 1.25rem 1rem" }} >
+          <button onClick={onClose} aria-label="Close" style={{ position: "absolute", right: 12, top: 12, background: "transparent", border: "none", fontSize: "2rem", lineHeight: 1 }}
+          >
+            ×
+          </button>
+  
+          <h2 id="jb-modal-title" className="mb-2">{moment.title}</h2>
+          <h3 className="text-dark-green mb-3" style={{ marginTop: -2 }}>
+            <span>{moment.date}</span>
+            {" "}&middot;{" "}
+            <p>{moment.category}</p>
+          </h3>
+  
+          {moment.description
+            ? <h3 className="mb-0">{moment.description}</h3>
+            : <h4 className="fst-italic text-muted mb-0">No description yet.</h4>}
+        </div>
+      </div>
+    );
+  }
+  
