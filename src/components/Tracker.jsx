@@ -57,7 +57,7 @@ export default function Tracker() {
                 setBrainDump('');
                 setGratitudeEntries(['' , '' , '']);
 
-                nav("/joy", {state:{gratitude : gratitudeEntries.filter(Boolean) , from: "tracker", createdAt: Date.now() }});
+                nav("/joy", {state:{ newMoments: gratitudeEntries.filter(Boolean) , from: "tracker", createdAt: Date.now() }});
             }
 
             return (

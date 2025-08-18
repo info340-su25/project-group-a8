@@ -18,7 +18,6 @@ export default function JoyBubble() {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleBubbleClick = (item) => {
-        console.log('Clicked bubble:', item);
         const moment = typeof item === "string"
             ? moments.find(mm => mm.title === item)
             : item;
@@ -113,7 +112,9 @@ export default function JoyBubble() {
     <div>
       <header className="d-flex justify-content-between align-items-center px-4 py-3 border-bottom">
         <div className="d-flex align-items-center">
-            <Link to="/" className="d-flex align-items-center text-decoration-none">
+            <Link to="/" className="d-flex align-items-center text-decoration-
+            
+            ne">
                 <img src="/img/unfold_logo.png" alt="Unfold Logo" height="60" />
                 <span className="visually-hidden">Home</span>
             </Link>
@@ -299,14 +300,10 @@ function JoyModal({ open, moment, onClose }) {
   
           <h2 id="jb-modal-title" className="mb-2">{moment.title}</h2>
           <h3 className="text-dark-green mb-3" style={{ marginTop: -2 }}>
-            <span>{moment.date}</span>
-            {" "}&middot;{" "}
-            <p>{moment.category}</p>
+            <span>{moment.date}</span>{" "}&middot;{" "} <p>{moment.category}</p>
           </h3>
   
-          {moment.description
-            ? <h3 className="mb-0">{moment.description}</h3>
-            : <h4 className="fst-italic text-muted mb-0">No description yet.</h4>}
+          <h3 className="mb-0">{moment.description}</h3>
         </div>
       </div>
     );

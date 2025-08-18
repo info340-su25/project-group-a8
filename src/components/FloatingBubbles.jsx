@@ -20,9 +20,10 @@ export default function FloatingBubbles({ items = [], minSize = 160, maxSize = 2
 
   return (
     <div className="floating-bubbles" style={{ position: "absolute", inset: 0, zIndex: 2, pointerEvents: "none" }}>
-      {bubbles.map((b) => (
-        <button key={b.id} type="button" className="text-bubble" onClick={() => onBubbleClick?.(b.item)}
+      {bubbles.map((b , i) => (
+        <button key={`${b.id}-${i}`} type="button" className="text-bubble" onClick={() => onBubbleClick?.(b.item)}
           style={{ position: 'absolute' , left: `${b.left}%`, width: b.size, height: b.size, animationDuration: `${b.duration}s`, animationDelay: `${b.delay}s`, pointerEvents: "auto"}}>
+            
           <span className="bubble-text text-dark-green px-3">{b.label}</span>
         </button>
       ))}
@@ -30,3 +31,4 @@ export default function FloatingBubbles({ items = [], minSize = 160, maxSize = 2
     
   );
 }
+// used ai to make the key unique, set the z-index/inset, to make bubbles clickable on the overlay!
