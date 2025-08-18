@@ -101,12 +101,11 @@ export default function Forecast({ moodEntries = [] }) {
             <header className="d-flex justify-content-between align-items-center px-4 py-3 border-bottom">
                 <img src="img/unfold_logo.png" alt="Unfold Logo" height="60" />
                 <nav className="d-none d-md-flex gap-4">
-                    <a href="/" className="nav-link">Home</a>
-                    <a href="/tracker" className="nav-link">Daily Check-In</a>
-                    <a href="/generator" className="nav-link">Shift Generator</a>
-                    <a href="/about" className="nav-link">About</a>
-                    <a href="/joy" className="nav-link">Joy Bubble</a>
-                    <a href="/reflection" className="nav-link">Reflection Pond</a>
+                        <a href="/" className="nav-link">Home</a>
+                        <a href="/tracker" className="nav-link">Daily Check-In</a>
+                        <a href="/joy" className="nav-link">Joy Bubble</a>
+                        <a href="/forecast" className="nav-link">Forecast</a>
+                        <a href="/about" className="nav-link">About</a>
                 </nav>
                 <button className="btn menu-toggle d-md-none" aria-label="Toggle navigation menu">&#9776;</button>
             </header>

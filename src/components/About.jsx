@@ -8,12 +8,11 @@ export default function About() {
       <span className="visually-hidden">About</span>
       </div>
        <nav className="d-none d-md-flex gap-4">
-      <a href="/" className="nav-link">Home</a>
-        <a href="/tracker" className="nav-link">Daily Check-In</a>
-         <a href="/generator" className="nav-link">Shift Generator</a>
-          <a href="/forecast" className="nav-link">Forecast</a>
-          <a href="/joy" className="nav-link">Joy Bubble</a>
-          <a href="/reflection" className="nav-link">Reflection Pond</a>
+            <a href="/" className="nav-link">Home</a>
+            <a href="/tracker" className="nav-link">Daily Check-In</a>
+            <a href="/joy" className="nav-link">Joy Bubble</a>
+            <a href="/forecast" className="nav-link">Forecast</a>
+            <a href="/about" className="nav-link">About</a>
          </nav>
           <button className="btn menu-toggle d-md-none" aria-label="Menu">&#9776;</button>
             </header>
@@ -49,6 +48,79 @@ export default function About() {
                                 </p>
                             </div>
                         </div>
+                    </div>
+                </section>
+                
+
+                <section className="py-5 meet-the-team">
+                    <div className="container">
+                        <h2 className="text-center mb-5 text-dark-green">The Unfold Greenhouse</h2>
+                            <div className="row g-4">
+                            {/* Person 1 */}
+                            <div className="col-12 col-md-6 col-lg-3">
+                                <article className="team-card rounded-4 p-3 shadow-lg">
+                                <img src="/img/team-ellie.jpg" alt="Ellie Marsh" className="team-avatar" width="96" height="96"/>
+                                <div className="team-body">
+                                    <h5 className="mb-1 text-dark-green">Ellie Marsh</h5>
+                                    <div className="small mb-1"><strong>Double Degree:</strong> Informatics w/ Data Science & Psychology</div>
+                                    <div className="small mb-2"><strong>Interests:</strong> UX/UI, Web Development, Neuroscience</div>
+                                    <div className="d-flex gap-3 small">
+                                    <a href="https://www.linkedin.com/in/ellie" target="_blank" rel="noreferrer" className="link-dark-green">LinkedIn</a>
+                                    <a href="mailto:ellie.marsh27@gmail.com" className="link-dark-green">Email</a>
+                                    </div>
+                                </div>
+                                </article>
+                            </div>
+
+                            {/* Person 2 */}
+                            <div className="col-12 col-md-6 col-lg-3">
+                                <article className="team-card rounded-4 p-3 shadow-sm">
+                                <img src="/img/team-2.jpg" alt="Kristina Tran" className="team-avatar" width="96" height="96" />
+                                <div className="team-body">
+                                    <h5 className="mb-1 text-dark-green">Kristina Tran</h5>
+                                    <div className="small mb-1"><strong>Double Degree:</strong> Biology & Informatics</div>
+                                    <div className="small mb-2"><strong>Interests:</strong> Motion, branding, plants</div>
+                                    <div className="d-flex gap-3 small">
+                                    <a href="https://www.linkedin.com/in/name2" target="_blank" rel="noreferrer" className="link-dark-green">LinkedIn</a>
+                                    <a href="mailto:name2@uw.edu" className="link-dark-green">Email</a>
+                                    </div>
+                                </div>
+                                </article>
+                            </div>
+
+                            {/* Person 3 */}
+                            <div className="col-12 col-md-6 col-lg-3">
+                                <article className="team-card rounded-4 p-3 shadow-sm">
+                                <img src="/img/team-3.jpg" alt="Fiona Evans" className="team-avatar" width="96" height="96" />
+                                <div className="team-body">
+                                    <h5 className="mb-1 text-dark-green">Fiona Evans</h5>
+                                    <div className="small mb-1"><strong>Major:</strong> CS</div>
+                                    <div className="small mb-2"><strong>Interests:</strong> Data viz, hiking, coffee</div>
+                                    <div className="d-flex gap-3 small">
+                                    <a href="https://www.linkedin.com/in/name3" target="_blank" rel="noreferrer" className="link-dark-green">LinkedIn</a>
+                                    <a href="mailto:name3@uw.edu" className="link-dark-green">Email</a>
+                                    </div>
+                                </div>
+                                </article>
+                            </div>
+
+                            {/* Person 4 */}
+                            <div className="col-12 col-md-6 col-lg-3">
+                                <article className="team-card rounded-4 p-3 shadow-sm">
+                                <img src="/img/team-4.jpg" alt="Sangini Mehta" className="team-avatar" width="96" height="96" />
+                                <div className="team-body">
+                                    <h5 className="mb-1 text-dark-green">Sangini Mehta</h5>
+                                    <div className="small mb-1"><strong>Major:</strong> HCDE</div>
+                                    <div className="small mb-2"><strong>Interests:</strong> Accessibility, photography</div>
+                                    <div className="d-flex gap-3 small">
+                                    <a href="https://www.linkedin.com/in/name4" target="_blank" rel="noreferrer" className="link-dark-green">LinkedIn</a>
+                                    <a href="mailto:name4@uw.edu" className="link-dark-green">Email</a>
+                                    </div>
+                                </div>
+                                </article>
+                                </div>
+                                </div>
+
                     </div>
                 </section>
 

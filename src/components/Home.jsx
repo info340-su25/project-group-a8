@@ -8,10 +8,11 @@ return (
         <span className="visually-hidden">Home</span>
                 </div>
                 <nav className="d-none d-md-flex gap-4">
-                    <a href="/tracker" className="nav-link">Daily Check-In</a>
-                    <a href="/joy" className="nav-link">Joy Bubble</a>
-                    <a href="/generator" className="nav-link">Shift Generator</a>
-                    <a href="/forecast" className="nav-link">Forecast</a>
+                        <a href="/" className="nav-link">Home</a>
+                        <a href="/tracker" className="nav-link">Daily Check-In</a>
+                        <a href="/joy" className="nav-link">Joy Bubble</a>
+                        <a href="/forecast" className="nav-link">Forecast</a>
+                        <a href="/about" className="nav-link">About</a>
                 </nav>
                 <button className="btn menu-toggle d-md-none" aria-label="Menu">&#9776;</button>
     </header>

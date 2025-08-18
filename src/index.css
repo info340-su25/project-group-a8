@@ -684,6 +684,51 @@ button:focus {
   border: 5px dashed #C5D1EE !important;
 }
 
+.meet-the-team {
+  background-color: #C5D1EE;
+  color: #42583D;   
+  border: 8px dashed #FFF6C6 ; 
+  border-radius: 1.5rem;
+  padding: 1rem;
+  margin-top: 40px;
+  font-weight: 400;
+  font-size: 1.5rem;
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.meet-the-team .team-member {
+  text-align: center; /* Default desktop */
+}
+
+.link-dark-green {
+  color: #FFF6C6;
+}
+
+.meet-the-team .team-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+@media (max-width: 767px) {
+  .meet-the-team .team-member {
+    display: flex;
+    align-items: center;
+    text-align: left;
+  }
+
+  .meet-the-team .team-img {
+    width: 100px;
+    height: 100px;
+    margin-right: 1rem;
+  }
+
+  .meet-the-team .team-info {
+    flex: 1;
+  }
+}
 
 
 
