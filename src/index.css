@@ -188,7 +188,12 @@ textarea.form-control {
   }
 
 .text-dark-green {
-  color: #42583D;
+  color: #42583D !important;
+}
+
+.bubble-text {
+  color: #42583D !important;
+  font-size: 1.5rem;
 }
 
 .bubble {
@@ -610,13 +615,67 @@ button:focus {
 }
 
 
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+.floating-bubbles {
+  position: absolute;
+  inset: 0;
+  overflow: scroll;
+  pointer-events: none;
+  z-index: 0;
 }
+
+.floating-bubbles .text-bubble {
+  position: absolute;
+  bottom: -90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  background: radial-gradient(circle at 35% 30%, #ffffffcc, #ffffff33 55%, #ffffff18 100%);
+  border-radius: 9999px;
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.12),
+    inset 0 2px 8px rgba(255,255,255,.35);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+
+  padding: 10px;
+  color: #0f3b2e !important;
+  font-weight: 600;
+  line-height: 1.2;
+
+  animation-name: bubble-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.text-bubble {
+  position: absolute;
+  bottom: -20%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  animation-name: bubble-rise;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+
+@keyframes bubble-float {
+  0%   { transform: translate(0, 0)         scale(1);    opacity: .92; }
+  50%  { transform: translate(-18px, -55vh) scale(1.04); opacity: .98; }
+  100% { transform: translate(12px, -110vh) scale(1.08); opacity: .95; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-bubbles .text-bubble { animation: none !important; }
+}
+
+
+
+
+/* use chatgpt to add animation/moving */

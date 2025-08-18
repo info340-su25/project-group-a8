@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
-import FloatingBubbles from './components/FloatingBubbles.jsx';
+import FloatingBubbles from "./FloatingBubbles.jsx";
 
 export default function JoyBubble() {
   const [moments, setMoments] = useState([]);
@@ -12,6 +12,31 @@ export default function JoyBubble() {
   const [status, setStatus] = useState({type: "",msg:"" });
 
   const location = useLocation();
+  
+
+  const [selectedMoment, setSelectedMoment] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleBubbleClick = (item) => {
+        console.log('Clicked bubble:', item);
+        const moment = typeof item === "string"
+            ? moments.find(mm => mm.title === item)
+            : item;
+
+        if (moment) {
+            setSelectedMoment(moment);
+            setIsOpen(true);
+        }
+    };
+
+    useEffect(() => {
+        if (!isOpen) return;
+        const onKey = (e) => { if (e.key === "Escape") setIsOpen(false); };
+        window.addEventListener("keydown", onKey);
+        return () => window.removeEventListener("keydown", onKey);
+      }, [isOpen]);
+
+    // used chatgpt to help create a "close" event listener
 
   const saveMoments = (event) => {
     setMoments(event);
@@ -67,35 +92,22 @@ export default function JoyBubble() {
         setStatus({ type: "success" , msg: "Added to your Joy Bubble!" });
   };
 
-  const collectionCards = useMemo( () =>
-      moments.map((moment) => (
-        <div key={moment.id} className="col-md-6 col-lg-4">
-          <div className="joy-card h-100 p-4 rounded shadow-sm bg-light-green">
-            <div className="joy-header d-flex align-items-center mb-3">
-              <div>
-                <h5 className="text-dark-green mb-1">{moment.title}</h5>
-                <small className="text-muted">{moment.date}</small>
-              </div>
-            </div>
-            {moment.description && (
-              <p className="text-dark-green mb-3">{moment.description}</p>
-            )}
-            <span className="badge bg-green text-cream">{moment.category}</span>
-          </div>
-        </div>
-      )),
-    [moments]
-  );
-
   const stats = useMemo( () => {
-    const total = moments.length;
-    const categories = new Map();
-    moments.forEach((moment) =>
-      categories.set(moment.category, (categories.get(moment.category) || 0) + 1)
+        const total = moments.length;
+        const categories = new Map();
+        moments.forEach((moment) =>
+        categories.set(moment.category, (categories.get(moment.category) || 0) + 1)
+        );
+        const topCategory = [...categories.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] || "—";
+        // used chatgpt for calculating topCategory & getting moments ^^
+        return { total, topCategory };}, [moments]
     );
-    const topCategory = [...categories.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] || "—";
-    // used chatgpt for calculating topCategory & getting moments ^^
-    return { total, topCategory };}, [moments]);
+
+    const bubbleTexts = moments.slice(0, 10).map(moment => (
+        <span key={moment.id} className="bubble-text">
+            {moment.title}
+        </span>
+        ));
 
   return (
     <div>
@@ -129,34 +141,31 @@ export default function JoyBubble() {
           </div>
         </section>
 
-        <section className="py-5">
-        <div className="container mb-20" style={{ backgroundColor: "#C5D1EE" , borderRadius: "12px", boxShadow: "4px 4px 8px 4px rgba(0, 0, 0, 0.5)" , padding: '30px'}}>
-            <h2 className="text-center mb-5">Your Joy Collection</h2>
-            <div style={{ position: "relative", minHeight: "100vh" }}>
-                {/* Background bubbles */}
-                <FloatingBubbles count={18} />
-            </div>
-            {status.msg && (
-              <div
-                role="status"
-                aria-live="polite"
-                className={`alert ${status.type === "error" ? "alert-danger" : "alert-success"} mt-3`}
-                style={{ color: "#FFFBED", border: "none" }}
-              >
-                {status.msg}
-              </div>
-            )}
+        <section>
+            <div
+                className="container mb-100 rounded-4 shadow-lg "
+                style={{ backgroundColor: "#C5D1EE", borderRadius: "12px", boxShadow: "4px 4px 8px 4px rgba(0,0,0,0.5)", padding: "30px", position: "relative",  overflow: "none" , paddingBottom: '20rem' }} >
 
-            {moments.length === 0 ? (
-              <div className="text-center text-cream">
-                <p>No moments yet. Add your first below or from the Daily Check-In.</p>
-                <Link to="/tracker" className="btn action-btn mt-2">Go to Daily Check-In</Link>
-              </div>
-            ) : (
-              <div className="row g-4">{collectionCards}</div>
-            )}
-          </div>
+                <FloatingBubbles items={moments} onBubbleClick={handleBubbleClick} />
+
+                <div style={{ position: "relative"}}>
+                <h2 className="text-center mb-5">Your Joy Collection</h2>
+                <h4 className= 'text-center mt-0'>Click on a bubble to see more!</h4>
+
+                {moments.length === 0 && (
+                <div className="text-center text-cream">
+                    <p>No moments yet. Add your first below or from the Daily Check-In.</p>
+                    <Link to="/tracker" className="btn action-btn mt-2">
+                    Go to Daily Check-In
+                    </Link>
+                </div>
+                )}
+            </div>
+            </div>
         </section>
+
+        
+
 
         <section className="py-5">
           <div className="container">
