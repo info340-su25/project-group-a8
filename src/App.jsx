@@ -1,10 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout.jsx';
 import Home from './components/Home.jsx';
 import Tracker from './components/Tracker';
 import About from './components/About.jsx';
 import Forecast from './components/Forecast.jsx';
 import JoyBubble from './components/JoyBubble.jsx';
 import Proposal from './components/Proposal';
+import NotFound from './components/NotFound.jsx';
 import './index.css';
 
 function App() {

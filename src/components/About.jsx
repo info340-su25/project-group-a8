@@ -1,23 +1,6 @@
 export default function About() {
   return (
         <div>
-
-  <header className="d-flex justify-content-between align-items-center px-4 py-3 border-bottom">
-   <div className="d-flex align-items-center">
-      <img src="img/unfold_logo.png" alt="Unfold Logo" height="60" />
-      <span className="visually-hidden">About</span>
-      </div>
-       <nav className="d-none d-md-flex gap-4">
-            <a href="/" className="nav-link">Home</a>
-            <a href="/tracker" className="nav-link">Daily Check-In</a>
-            <a href="/joy" className="nav-link">Joy Bubble</a>
-            <a href="/forecast" className="nav-link">Forecast</a>
-            <a href="/about" className="nav-link">About</a>
-         </nav>
-          <button className="btn menu-toggle d-md-none" aria-label="Menu">&#9776;</button>
-            </header>
-
-           
             <main className="container-fluid pt-5">
               
                 <section className="hero-section text-center py-5">
@@ -190,20 +173,6 @@ export default function About() {
                     </div>
                 </section>
             </main>
-
-      <footer className="bg-dark text-light py-4 mt-5">
-         <div className="container">
-                    <div className="row">
-                        <div className="col-md-6">
-                            <h5>Unfold</h5>
-                            <p className="mb-0">A digital wellness garden for students</p>
-                        </div>
-                        <div className="col-md-6 text-md-end">
-                            <p className="mb-0">&copy; 2025 Unfold | Group A8 | University of Washington</p>
-                        </div>
-                    </div>
-                </div>
-            </footer>
         </div>
     );
 }
