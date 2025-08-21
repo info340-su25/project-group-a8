@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import FloatingBubbles from "./FloatingBubbles.jsx";
+import { getDatabase, ref, push as firebasePush } from 'firebase/database';
+
 
 export default function JoyBubble() {
   const [moments, setMoments] = useState([]);
@@ -85,13 +87,32 @@ export default function JoyBubble() {
         }
         const currDate = new Date().toISOString().slice(0, 10);
         const newMoment = { id: crypto.randomUUID(), title: title.trim(), description: description.trim(), date: currDate, category};
-        // used chatgpt to get ID (using crypto + randomUUID)
-        const updateMoment = [newMoment, ...moments];
-        saveMoments(updateMoment);
-        setTitle('');
-        setCategory("");
-        setDescription("");
-        setStatus({ type: "success" , msg: "Added to your Joy Bubble!" });
+        
+        console.log(newMoment);
+        //ADD TO FIREBASE DATABASE
+        const db = getDatabase();
+        const allJoyBubbles = ref(db, "allJoyBubbles");
+        firebasePush(allJoyBubbles, newMoment)
+        .then(()=> {
+            console.log("data saved");
+            //ERROR!! allJoyBubble saved but not newMoment   
+            // <----- WONT NEED ANYMORE ??? ------>
+            //used chatgpt to get ID (using crypto + randomUUID)
+            const updateMoment = [newMoment, ...moments];
+            saveMoments(updateMoment);
+
+            setTitle('');
+            setCategory("");
+            setDescription("");
+            setStatus({ type: "success" , msg: "Added to your Joy Bubble!" });  
+                   
+        })
+        .catch(err =>{
+            console.error("error in saving ");
+        })
+        
+        
+        
   };
 
   const stats = useMemo( () => {

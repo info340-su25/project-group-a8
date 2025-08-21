@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useNavigate } from "react-router";
 
+import { getDatabase, ref, push as firebasePush } from 'firebase/database';
+
 export default function Tracker() {
 
             const [username , setUsername] = useState('Ellie');
@@ -37,6 +39,7 @@ export default function Tracker() {
                 return (<input key={index} name={`gratitude${index + 1}`} type="text" className="form-control mb-2" placeholder={placeholder} value={entry} onChange={(e) => {
                       const next = [...gratitudeEntries];
                       next[index] = e.target.value;
+                      
                       setGratitudeEntries(next);
                     }}/>
                 );});
@@ -52,13 +55,25 @@ export default function Tracker() {
                 const checkinData = {createdAt: Date.now(), mood, socialBattery : socialBatterySlider, socialPlans, screenTime, digitalHabits, mindSpace, sleep, brainDump, gratitudeEntries: gratitudeEntries.filter(Boolean), overallScore};
                 console.log(checkinData);
 
-                setCheckins(prev => [{ id: crypto.randomUUID(), ...checkinData }, ...prev]);
+                const db = getDatabase();
+                console.log(db);
 
-                setBrainDump('');
-                setGratitudeEntries(['' , '' , '']);
+                const allCheckinEntriesRef = ref(db, "allCheckinEntries");
+                firebasePush(allCheckinEntriesRef, checkinData)
+                .then(()=> {
+                    console.log("data saved");
+                    setCheckins(prev => [{ id: crypto.randomUUID(), ...checkinData }, ...prev]);
 
-                nav("/joy", {state:{ newMoments: gratitudeEntries.filter(Boolean) , from: "tracker", createdAt: Date.now() }});
-            }
+                    setBrainDump('');
+                    setGratitudeEntries(['' , '' , '']);
+    
+                    nav("/joy", {state:{ newMoments: gratitudeEntries.filter(Boolean) , from: "tracker", createdAt: Date.now() }});
+                
+                })
+                .catch(err =>{
+                    console.error("error in saving ");
+                })
+               }
 
             return (
                 <div className="bg-green text-cream">
