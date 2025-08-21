@@ -32,7 +32,8 @@ export default function JoyBubble() {
         })
         //console.log(data);
         setMoments(dataArray); //adds all messages from database to past checkins;
-        //console.log(checkins); //ERROR SHOWS THAT THERE IS NO CHECKINS 
+        saveMoments(dataArray);
+        
     })
 }, [])
 
@@ -119,13 +120,16 @@ export default function JoyBubble() {
             console.log("data saved"); 
             // <----- WONT NEED ANYMORE ??? ------>
             //used chatgpt to get ID (using crypto + randomUUID)
-            const updateMoment = [newMoment, ...moments];
-            saveMoments(updateMoment);
+            
+            //const updateMoment = [newMoment, ...moments];
+            //saveMoments(updateMoment);
+            
+            console.log(moments);
 
             setTitle('');
             setCategory("");
             setDescription("");
-            //setStatus({ type: "success" , msg: "Added to your Joy Bubble!" });  
+            setStatus({ type: "success" , msg: "Added to your Joy Bubble!" });  
 
         })
         .catch(err =>{
