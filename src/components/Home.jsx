@@ -1,3 +1,7 @@
+
+import { Link } from "react-router-dom";
+
+
 export default function Home() {
     return (
         <div className="container-fluid">
@@ -11,7 +15,7 @@ export default function Home() {
                         <img src="img/cute_lil_bear.png" alt="Cute bear mascot" className="img-fluid hero-mascot cute-lil-bear-img" style={{maxHeight: '500px'}} />
                     </div>
                     <p className="fs-5 mb-4">Take a moment to breathe, reflect, and reconnect with yourself.</p>
-                    <a href="/tracker" className="btn joy-btn btn-lg px-5 py-3">Start Your Daily Check-In</a>
+                    <Link to="/tracker" className="btn joy-btn btn-lg px-5 py-3">Start Your Daily Check-In</Link>
                 </div>
             </section>
 
@@ -27,7 +31,7 @@ export default function Home() {
                                     <h3 className="text-dark-green">Daily Check-In</h3>
                                 </div>
                                 <p className="text-muted mb-4 text-center">Track your mood, energy, sleep, and thoughts. Small moments of reflection can lead to big insights.</p>
-                                <a href="/tracker" className="btn btn-outline action-btn w-100">Start Tracking</a>
+                                <Link to="/tracker" className="btn btn-outline action-btn w-100">Start Tracking</Link>
                             </div>
                         </div>
                         
@@ -38,7 +42,7 @@ export default function Home() {
                                     <h3 className="text-dark-green">One Small Shift</h3>
                                 </div>
                                 <p className="text-muted mb-4 text-center">Discover micro-habits and offline activities. Sometimes the smallest changes make the biggest difference.</p>
-                                <a href="/generator" className="btn btn-outline action-btn w-100">Generate Ideas</a>
+                                <Link to="/generator" className="btn btn-outline action-btn w-100">Generate Ideas</Link>
                             </div>
                         </div>
                         
@@ -49,7 +53,7 @@ export default function Home() {
                                     <h3 className="text-dark-green">Emotional Forecast</h3>
                                 </div>
                                 <p className="text-muted mb-4 text-center">Check in with your emotional weather and find your reset room for when you need to recharge.</p>
-                                <a href="/forecast" className="btn btn-outline action-btn w-100">Check Forecast</a>
+                                <Link to="/forecast" className="btn btn-outline action-btn w-100">Check Forecast</Link>
                             </div>
                         </div>
                         
@@ -60,7 +64,7 @@ export default function Home() {
                                     <h3 className="text-dark-green">Joy Bubble</h3>
                                 </div>
                                 <p className="text-muted mb-4 text-center">Collect and revisit moments of gratitude and joy. Let the light in — you made this.</p>
-                                <a href="/joy" className="btn btn-outline action-btn w-100">View Bubble</a>
+                                <Link to="/joy" className="btn btn-outline action-btn w-100">View Bubble</Link>
                             </div>
                         </div>
                         
@@ -71,7 +75,7 @@ export default function Home() {
                                     <h3 className="text-dark-green">Reflection Pond</h3>
                                 </div>
                                 <p className="text-muted mb-4 text-center">Look back on your journey and see how far you've come. Progress isn't always linear.</p>
-                                <a href="/reflection" className="btn btn-outline action-btn w-100">Reflect</a>
+                                <Link to="/reflection" className="btn btn-outline action-btn w-100">Reflect</Link>
                             </div>
                         </div>
                         
@@ -82,7 +86,7 @@ export default function Home() {
                                     <h3 className="text-dark-green">Reset Room</h3>
                                 </div>
                                 <p className="text-muted mb-4 text-center">A calming digital space to breathe and reset when life feels overwhelming.</p>
-                                <a href="/reset-room" className="btn btn-outline action-btn w-100">Enter Room</a>
+                                <Link to="/reset-room" className="btn btn-outline action-btn w-100">Enter Room</Link>
                             </div>
                         </div>
                     </div>
@@ -94,8 +98,8 @@ export default function Home() {
                 <div className="container">
                     <h2 className="mb-4">Ready to begin your wellness journey?</h2>
                     <p className="lead mb-4">Start small. Start today. You deserve to unfold.</p>
-                    <a href="/tracker" className="btn action-btn btn-lg me-3">Begin Check-In</a>
-                    <a href="/generator" className="btn btn-outline action-btn btn-lg">Get Inspiration</a>
+                    <Link to="/tracker" className="btn action-btn btn-lg me-3">Begin Check-In</Link>
+                    <Link to="/generator" className="btn btn-outline action-btn btn-lg">Get Inspiration</Link>
                 </div>
             </section>
         </div>

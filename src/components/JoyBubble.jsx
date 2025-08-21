@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import FloatingBubbles from "./FloatingBubbles.jsx";
-import { getDatabase, ref, push as firebasePush } from 'firebase/database';
+import { getDatabase, ref, push as firebasePush, onValue} from 'firebase/database';
 
 
 export default function JoyBubble() {
@@ -15,6 +15,28 @@ export default function JoyBubble() {
 
   const location = useLocation();
   
+
+  useEffect(() =>{
+    //subscribe to the database - for allCheckinEntries
+    const db = getDatabase();
+    const allJoyBubblesRef = ref(db, "allJoyBubbles");
+    
+    onValue(allJoyBubblesRef, function(snapshot){
+        const data = snapshot.val();
+
+        const keyArray = Object.keys(data);
+        const dataArray = keyArray.map((keyString) => {
+            const transformed = data[keyString];
+            transformed.firebaseKey = keyString;
+            return transformed;
+        })
+        //console.log(data);
+        setMoments(dataArray); //adds all messages from database to past checkins;
+        //console.log(checkins); //ERROR SHOWS THAT THERE IS NO CHECKINS 
+    })
+}, [])
+
+
 
   const [selectedMoment, setSelectedMoment] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
@@ -135,11 +157,12 @@ export default function JoyBubble() {
             </Link>
         </div>
                     <nav className="d-none d-md-flex gap-4">
-                        <a href="/" className="nav-link">Home</a>
-                        <a href="/tracker" className="nav-link">Daily Check-In</a>
-                        <a href="/joy" className="nav-link">Joy Bubble</a>
-                        <a href="/forecast" className="nav-link">Forecast</a>
-                        <a href="/about" className="nav-link">About</a>
+                      <Link to="/" className="nav-link">Home</Link>
+                      <Link to="/tracker" className="nav-link">Daily Check-In</Link>
+                      <Link to="/joy" className="nav-link">Joy Bubble</Link>
+                      <Link to="/forecast" className="nav-link">Forecast</Link>
+                      <Link to="/about" className="nav-link">About</Link>
+                            
                         
                     </nav>
                     <button className="btn menu-toggle d-md-none" aria-label="Menu">&#9776;</button>

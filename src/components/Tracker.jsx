@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
-import { getDatabase, ref, push as firebasePush } from 'firebase/database';
+
+import { getDatabase, ref, push as firebasePush, onValue } from 'firebase/database';
 
 export default function Tracker() {
 
@@ -28,7 +30,28 @@ export default function Tracker() {
 
             const nav = useNavigate();
 
-            
+            useEffect(() =>{
+                //subscribe to the database - for allCheckinEntries
+                const db = getDatabase();
+                const allCheckinEntriesRef = ref(db, "allCheckinEntries");
+                
+                onValue(allCheckinEntriesRef, function(snapshot){
+                    const data = snapshot.val();
+
+                    const keyArray = Object.keys(data);
+                    const dataArray = keyArray.map((keyString) => {
+                        const transformed = data[keyString];
+                        transformed.firebaseKey = keyString;
+                        return transformed;
+                    })
+                    //console.log(data);
+                    setCheckins(dataArray); //adds all messages from database to past checkins;
+                    //console.log(checkins); //ERROR SHOWS THAT THERE IS NO CHECKINS 
+                })
+            }, [])
+
+
+
             const gratitudeInputs = gratitudeEntries.map((entry, index) => {
                 let placeholder;
                 if (index === 0) {
@@ -43,6 +66,9 @@ export default function Tracker() {
                       setGratitudeEntries(next);
                     }}/>
                 );});
+
+
+            
 
             const handleSubmit = (event) => {
                 event.preventDefault();
@@ -62,8 +88,8 @@ export default function Tracker() {
                 firebasePush(allCheckinEntriesRef, checkinData)
                 .then(()=> {
                     console.log("data saved");
-                    setCheckins(prev => [{ id: crypto.randomUUID(), ...checkinData }, ...prev]);
-
+                    //setCheckins(prev => [{ id: crypto.randomUUID(), ...checkinData }, ...prev]);
+                    //console.log(checkins);
                     setBrainDump('');
                     setGratitudeEntries(['' , '' , '']);
     
@@ -80,13 +106,13 @@ export default function Tracker() {
                     <header className="d-flex justify-content-between align-items-center px-4 py-3 border-bottom">
                         <img src="/img/unfold_logo.png" alt="Unfold Logo" height="60" />
                         <nav className="d-none d-md-flex gap-4">
-                            <a href="/" className="nav-link">Home</a>
-                            <a href="/tracker" className="nav-link">Daily Check-In</a>
-                            <a href="/joy" className="nav-link">Joy Bubble</a>
-                            <a href="/forecast" className="nav-link">Forecast</a>
-                            <a href="/about" className="nav-link">About</a>
+                            <Link to="/" className="nav-link">Home</Link>
+                            <Link to="/tracker" className="nav-link">Daily Check-In</Link>
+                            <Link to="/joy" className="nav-link">Joy Bubble</Link>
+                            <Link to="/forecast" className="nav-link">Forecast</Link>
+                            <Link to="/about" className="nav-link">About</Link>
                             
-                        </nav>
+                        </nav> 
                         <button className="btn menu-toggle d-md-none" aria-label="Menu">&#9776;</button>
                     </header>
 
