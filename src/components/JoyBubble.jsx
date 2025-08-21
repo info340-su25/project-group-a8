@@ -94,8 +94,7 @@ export default function JoyBubble() {
         const allJoyBubbles = ref(db, "allJoyBubbles");
         firebasePush(allJoyBubbles, newMoment)
         .then(()=> {
-            console.log("data saved");
-            //ERROR!! allJoyBubble saved but not newMoment   
+            console.log("data saved"); 
             // <----- WONT NEED ANYMORE ??? ------>
             //used chatgpt to get ID (using crypto + randomUUID)
             const updateMoment = [newMoment, ...moments];
@@ -104,14 +103,14 @@ export default function JoyBubble() {
             setTitle('');
             setCategory("");
             setDescription("");
-            setStatus({ type: "success" , msg: "Added to your Joy Bubble!" });  
-                   
+            //setStatus({ type: "success" , msg: "Added to your Joy Bubble!" });  
+
         })
         .catch(err =>{
             console.error("error in saving ");
         })
         
-        
+        setStatus({ type: "success" , msg: "Added to your Joy Bubble!" });  
         
   };
 
