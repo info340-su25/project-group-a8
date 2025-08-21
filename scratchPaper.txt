@@ -1,0 +1,15 @@
+database = {
+    userData: {
+        user 1: {
+            name: 
+            checkinEntries:
+            JoyBubbles:
+        }
+
+        user 2: {
+            name: 
+            checkinEntries:
+            JoyBubbles:
+        }
+    }
+}

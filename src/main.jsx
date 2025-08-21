@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { LoginPage } from './LoginPage.jsx';
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -26,6 +27,7 @@ initializeApp(firebaseConfig);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
+    <LoginPage />
     <App />
   </BrowserRouter>
 );
