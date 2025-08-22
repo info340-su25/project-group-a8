@@ -59,6 +59,15 @@ export const sampleMoodEntries = [
     }
   ];
 
+export const signedOutUser = [
+    {
+        "userId": null,
+        "userName": "User (Not Logged In)",
+
+    }
+
+]
+
 export const sampleJoyMoments = [
     {
       id: 1,

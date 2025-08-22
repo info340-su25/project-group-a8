@@ -27,7 +27,7 @@ initializeApp(firebaseConfig);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <LoginPage />
+    {/* <LoginPage /> */}
     <App />
   </BrowserRouter>
 );

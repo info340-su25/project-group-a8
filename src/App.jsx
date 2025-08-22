@@ -7,11 +7,13 @@ import Forecast from './components/Forecast.jsx';
 import JoyBubble from './components/JoyBubble.jsx';
 import Proposal from './components/Proposal';
 import NotFound from './components/NotFound.jsx';
+import { SignOut } from './components/SignOut.jsx';
 import './index.css';
-import { sampleMoodEntries, sampleFeatures, sampleJoyMoments, sampleTeamMembers} from './components/samples.jsx';
+import { sampleMoodEntries, sampleFeatures, sampleJoyMoments, sampleTeamMembers, signedOutUser} from './components/samples.jsx';
 import { useState } from 'react';
 
 import { onAuthStateChanged, getAuth } from 'firebase/auth';
+import { LoginPage } from './LoginPage.jsx';
 
 
 
@@ -21,10 +23,16 @@ function App() {
   const auth = getAuth();
   onAuthStateChanged(auth, (firebaseUserObj) => {
     console.log("auth state has changed");
-    //console.log(firebaseUserObj);
-    firebaseUserObj.userId = firebaseUserObj.uid;
-    firebaseUserObj.userName = firebaseUserObj.displayName;
-    setCurrUser(firebaseUserObj);
+    if (firebaseUserObj != null){
+      console.log(firebaseUserObj);
+      firebaseUserObj.userId = firebaseUserObj.uid;
+      firebaseUserObj.userName = firebaseUserObj.displayName;
+      setCurrUser(firebaseUserObj);
+    }else{
+      setCurrUser(signedOutUser[0]);
+
+    }
+    
   })
 
 
@@ -33,6 +41,13 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Home />} />
+
+        <Route path="/login" element={<LoginPage />} />
+
+        <Route 
+          path="/signOut" element={<SignOut />}
+        />
+        
         <Route 
           path="/tracker" 
           element={<Tracker moodEntries={sampleMoodEntries} />} 

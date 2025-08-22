@@ -7,7 +7,7 @@ import App from './App.jsx';
 
 
 export function LoginPage(){
-
+    //const [currUser, setCurrUser] = useState([]);
     const authenticator = getAuth();
 
     const configObj = {

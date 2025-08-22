@@ -1,5 +1,6 @@
 
 import { Link } from "react-router-dom";
+import { SignOut } from "./SignOut";
 
 
 export default function Home() {
@@ -100,6 +101,8 @@ export default function Home() {
                     <p className="lead mb-4">Start small. Start today. You deserve to unfold.</p>
                     <Link to="/tracker" className="btn action-btn btn-lg me-3">Begin Check-In</Link>
                     <Link to="/generator" className="btn btn-outline action-btn btn-lg">Get Inspiration</Link>
+                    {/* add sign out  */}
+                    <Link to="/signOut" className="btn btn-outline action-btn btn-lg">Sign-Out</Link>
                 </div>
             </section>
         </div>
