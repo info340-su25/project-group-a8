@@ -7,9 +7,8 @@ import { signedOutUser } from "./samples";
 
 
 
-export default function Home() {
+export default function Home( {currUser, setCurrUser}) {
 
-    const [currUser, setCurrUser] = useState([]);
 
     useEffect(() =>{
         const auth = getAuth();

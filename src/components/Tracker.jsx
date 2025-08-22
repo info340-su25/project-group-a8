@@ -8,8 +8,7 @@ import { onAuthStateChanged, getAuth } from 'firebase/auth';
 
 import { getDatabase, ref, push as firebasePush, onValue } from 'firebase/database';
 
-export default function Tracker() {
-            const [currUser, setCurrUser] = useState([]);
+export default function Tracker({currUser}) {
             const [mood , setMood] = useState({ energy: 5, stress: 5, excitement: 5, overallMood: 5 });
 
             const [socialBatterySlider , setSocialBatterySlider] = useState(5);
@@ -33,33 +32,38 @@ export default function Tracker() {
 
             
 
-            useEffect(() =>{
-                const auth = getAuth();
-                onAuthStateChanged(auth, (firebaseUserObj) => {
-                console.log("auth state has changed");
-                if (firebaseUserObj != null){
-                    console.log(firebaseUserObj);
-                    console.log("firebase logs user as:", firebaseUserObj);
-                    firebaseUserObj.userId = firebaseUserObj.uid;
-                    firebaseUserObj.userName = firebaseUserObj.displayName;
-                    setCurrUser(firebaseUserObj);
-                    console.log("user is updated to current");
-                }else{
-                    setCurrUser(signedOutUser[0]);
+            // useEffect(() =>{
+            //     const auth = getAuth();
+            //     onAuthStateChanged(auth, (firebaseUserObj) => {
+            //     console.log("auth state has changed");
+            //     if (firebaseUserObj != null){
+            //         console.log(firebaseUserObj);
+            //         console.log("firebase logs user as:", firebaseUserObj);
+            //         firebaseUserObj.userId = firebaseUserObj.uid;
+            //         firebaseUserObj.userName = firebaseUserObj.displayName;
+            //         setCurrUser(firebaseUserObj);
+            //         console.log("user is updated to current");
+            //     }else{
+            //         setCurrUser(signedOutUser[0]);
         
-                }
+            //     }
                 
-                })
-            }, []);
+            //     })
+            // }, []);
 
             useEffect(() =>{
-                //subscribe to the database - for allCheckinEntries
                 const db = getDatabase();
-                const allCheckinEntriesRef = ref(db, "allCheckinEntries");
+                const username = currUser.userName;
+                const allCheckinEntriesRef = ref(db,`${username}/checkinEntries`);
                 
                 onValue(allCheckinEntriesRef, function(snapshot){
                     const data = snapshot.val();
 
+                    if(!snapshot.val()){
+                        setMoments([]);
+                        saveMoments([]);
+                        return;
+                      }
                     const keyArray = Object.keys(data);
                     const dataArray = keyArray.map((keyString) => {
                         const transformed = data[keyString];

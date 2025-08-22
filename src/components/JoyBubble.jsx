@@ -2,9 +2,10 @@ import { useEffect, useMemo, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import FloatingBubbles from "./FloatingBubbles.jsx";
 import { getDatabase, ref, push as firebasePush, onValue} from 'firebase/database';
+import { onAuthStateChanged, getAuth } from 'firebase/auth';
 
+export default function JoyBubble( {currUser}) {
 
-export default function JoyBubble() {
   const [moments, setMoments] = useState([]);
 
   const [title, setTitle] = useState("");
@@ -16,20 +17,63 @@ export default function JoyBubble() {
   const location = useLocation();
   
 
-  useEffect(() =>{
-    //subscribe to the database - for allCheckinEntries
+
+  function addToDatabase(newMoment){
+    //ADD TO FIREBASE DATABASE
+
+
     const db = getDatabase();
-    const allJoyBubblesRef = ref(db, "allJoyBubbles");
+    const username = currUser.userName;
+    const allJoyBubbles = ref(db, `${username}/allJoyBubbles`); 
+    firebasePush(allJoyBubbles, newMoment)
+    .then(()=> {
+        console.log("data saved"); 
+        // <----- WONT NEED ANYMORE ??? ------>
+        //used chatgpt to get ID (using crypto + randomUUID)
+        
+        //const updateMoment = [newMoment, ...moments];
+        //saveMoments(updateMoment);
+        
+        console.log(moments);
+
+        setTitle('');
+        setCategory("");
+        setDescription("");
+        setStatus({ type: "success" , msg: "Added to your Joy Bubble!" });  
+
+    })
+    .catch(err =>{
+        console.error("error in saving ");
+    })
+    
+    setStatus({ type: "success" , msg: "Added to your Joy Bubble!" });
+  }
+
+
+
+  //SHOULD THIS BE A FUNCTION CALLED AFTER EVERY ADD?
+  useEffect(() =>{
+    //subscribe to the database - for allJoyBubbles
+
+    console.log(currUser);
+    const db = getDatabase();
+    const username = currUser.userName;
+    const allJoyBubblesRef = ref(db, `${username}/allJoyBubbles`);
     
     onValue(allJoyBubblesRef, function(snapshot){
         const data = snapshot.val();
 
+        if(!snapshot.val()){
+          setMoments([]);
+          saveMoments([]);
+          return;
+        }
         const keyArray = Object.keys(data);
-        const dataArray = keyArray.map((keyString) => {
+        const dataArray =  keyArray.map((keyString) => {
             const transformed = data[keyString];
             transformed.firebaseKey = keyString;
             return transformed;
-        })
+        }) 
         //console.log(data);
         setMoments(dataArray); //adds all messages from database to past checkins;
         saveMoments(dataArray);
@@ -93,10 +137,9 @@ export default function JoyBubble() {
       const mapped = incoming.filter(Boolean).map((text) => ({ id: crypto.randomUUID(), title: text, description: "", date: currentDate, category: "Gratitude"}));
       // used chatgpt to get ID (using crypto + randomUUID)
       const newMoments = [...mapped, ...moments];
-      saveMoments(newMoments);
-      setStatus({ type: "success" , msg: "Gratitude added to your Joy Bubble!"});
-    }}, [location.state] );
-
+      addToDatabase(newMoments);
+    }
+  });
   const handleAdd = (event) => {
         event.preventDefault();
 
@@ -113,30 +156,7 @@ export default function JoyBubble() {
         
         console.log(newMoment);
         //ADD TO FIREBASE DATABASE
-        const db = getDatabase();
-        const allJoyBubbles = ref(db, "allJoyBubbles");
-        firebasePush(allJoyBubbles, newMoment)
-        .then(()=> {
-            console.log("data saved"); 
-            // <----- WONT NEED ANYMORE ??? ------>
-            //used chatgpt to get ID (using crypto + randomUUID)
-            
-            //const updateMoment = [newMoment, ...moments];
-            //saveMoments(updateMoment);
-            
-            console.log(moments);
-
-            setTitle('');
-            setCategory("");
-            setDescription("");
-            setStatus({ type: "success" , msg: "Added to your Joy Bubble!" });  
-
-        })
-        .catch(err =>{
-            console.error("error in saving ");
-        })
-        
-        setStatus({ type: "success" , msg: "Added to your Joy Bubble!" });  
+        addToDatabase(newMoment);
         
   };
 

@@ -10,19 +10,21 @@ import NotFound from './components/NotFound.jsx';
 import { SignOut } from './components/SignOut.jsx';
 import './index.css';
 import { sampleMoodEntries, sampleFeatures, sampleJoyMoments, sampleTeamMembers, signedOutUser} from './components/samples.jsx';
-
+import { useState } from 'react';
 import { LoginPage } from './LoginPage.jsx';
 
 
 
 function App() {
 
+  const [currUser, setCurrUser] = useState([]);
+
 
 
   return (
     <div className="App">
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/home" element={<Home currUser={currUser} setCurrUser={setCurrUser}/>} />
 
         <Route path="/" element={<LoginPage />} />
 
@@ -32,7 +34,7 @@ function App() {
         
         <Route 
           path="/tracker" 
-          element={<Tracker moodEntries={sampleMoodEntries}  />} 
+          element={<Tracker moodEntries={sampleMoodEntries} currUser={currUser} />} 
         />
         <Route 
           path="/forecast" 
@@ -40,7 +42,7 @@ function App() {
         />
         <Route 
           path="/joy" 
-          element={<JoyBubble joyMoments={sampleJoyMoments} />} 
+          element={<JoyBubble joyMoments={sampleJoyMoments} currUser={currUser}/>} 
         />
         <Route 
           path="/about" 
