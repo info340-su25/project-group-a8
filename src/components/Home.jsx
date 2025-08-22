@@ -1,9 +1,34 @@
 
 import { Link } from "react-router-dom";
 import { SignOut } from "./SignOut";
+import { useEffect, useState } from 'react';
+import { onAuthStateChanged, getAuth } from 'firebase/auth';
+import { signedOutUser } from "./samples";
 
 
 export default function Home() {
+
+    const [currUser, setCurrUser] = useState([]);
+
+    const auth = getAuth();
+    onAuthStateChanged(auth, (firebaseUserObj) => {
+      console.log("auth state has changed");
+      if (firebaseUserObj != null){
+        console.log(firebaseUserObj);
+        console.log("firebase logs user as:", firebaseUserObj);
+        firebaseUserObj.userId = firebaseUserObj.uid;
+        firebaseUserObj.userName = firebaseUserObj.displayName;
+        setCurrUser(firebaseUserObj);
+        console.log("user is updated to current");
+      }else{
+        setCurrUser(signedOutUser[0]);
+
+      }
+      
+    })
+
+
+
     return (
         <div className="container-fluid">
             {/* Hero Section */}
@@ -100,9 +125,9 @@ export default function Home() {
                     <h2 className="mb-4">Ready to begin your wellness journey?</h2>
                     <p className="lead mb-4">Start small. Start today. You deserve to unfold.</p>
                     <Link to="/tracker" className="btn action-btn btn-lg me-3">Begin Check-In</Link>
-                    <Link to="/generator" className="btn btn-outline action-btn btn-lg">Get Inspiration</Link>
+                    <Link to="/generator" className="btn btn-outline action-btn btn-lg me-3">Get Inspiration</Link>
                     {/* add sign out  */}
-                    <Link to="/signOut" className="btn btn-outline action-btn btn-lg">Sign-Out</Link>
+                    <Link to="/signOut" className="btn btn-outline action-btn btn-lg me-3">Sign-Out</Link>
                 </div>
             </section>
         </div>

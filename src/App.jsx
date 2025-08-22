@@ -10,39 +10,41 @@ import NotFound from './components/NotFound.jsx';
 import { SignOut } from './components/SignOut.jsx';
 import './index.css';
 import { sampleMoodEntries, sampleFeatures, sampleJoyMoments, sampleTeamMembers, signedOutUser} from './components/samples.jsx';
-import { useState } from 'react';
 
-import { onAuthStateChanged, getAuth } from 'firebase/auth';
 import { LoginPage } from './LoginPage.jsx';
 
 
 
 function App() {
-  const [currUser, setCurrUser] = useState([]);
+  
+  // const [authInitialized, setAuthInitialized] = useState(false);
 
-  const auth = getAuth();
-  onAuthStateChanged(auth, (firebaseUserObj) => {
-    console.log("auth state has changed");
-    if (firebaseUserObj != null){
-      console.log(firebaseUserObj);
-      firebaseUserObj.userId = firebaseUserObj.uid;
-      firebaseUserObj.userName = firebaseUserObj.displayName;
-      setCurrUser(firebaseUserObj);
-    }else{
-      setCurrUser(signedOutUser[0]);
+  // useEffect(() => {
+  //   const auth = getAuth();
+  //   const unsubscribe = onAuthStateChanged(auth, (firebaseUserObj) => {
+  //     if (firebaseUserObj != null){
+  //       firebaseUserObj.userId = firebaseUserObj.uid;
+  //       firebaseUserObj.userName = firebaseUserObj.displayName;
+  //       setCurrUser(firebaseUserObj);
+  //     } else {
+  //       setCurrUser(signedOutUser[0]);
+  //     }
+  //     setAuthInitialized(true); // mark that auth state has loaded
+  //   });
 
-    }
-    
-  })
+  //   return () => unsubscribe();
+  // }, []);
+
+  
 
 
 
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Home />} />
 
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<LoginPage />} />
 
         <Route 
           path="/signOut" element={<SignOut />}
@@ -50,7 +52,7 @@ function App() {
         
         <Route 
           path="/tracker" 
-          element={<Tracker moodEntries={sampleMoodEntries} />} 
+          element={<Tracker moodEntries={sampleMoodEntries}  />} 
         />
         <Route 
           path="/forecast" 

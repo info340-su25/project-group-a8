@@ -1,17 +1,34 @@
-
 import { StyledFirebaseAuth } from "react-firebaseui";
 import { getAuth, EmailAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import App from './App.jsx';
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 
 
 
 export function LoginPage(){
     //const [currUser, setCurrUser] = useState([]);
-    //added navigate by chat to know how to navigate after authentication
+    
     const navigate = useNavigate();
     const authenticator = getAuth();
+
+    // const configObj = {
+    //     signInOptions: [ 
+    //       GoogleAuthProvider.PROVIDER_ID,
+    //       EmailAuthProvider.PROVIDER_ID, 
+    //     ],
+    //     signInFlow: 'popup', //don't redirect to authenticate
+    //     credentialHelper: 'none', //don't show the email account chooser
+    //     callbacks: { //"lifecycle" callbacks
+    //       signInSuccessWithAuthResult: () => {
+    //         console.log('user is logged in')
+    //         navigate('/');
+            
+    //         return false; //don't redirect after authentication
+    //       }
+    //     }
+    // }
 
     const configObj = {
         signInOptions: [ 
@@ -22,11 +39,19 @@ export function LoginPage(){
         credentialHelper: 'none', //don't show the email account chooser
         callbacks: { //"lifecycle" callbacks
           signInSuccessWithAuthResult: () => {
-            navigate('/');
+            console.log('user is logged in')
+            navigate('/home');
+            // Don't navigate here, let the App.jsx useEffect handle it based on currUser
             return false; //don't redirect after authentication
           }
         }
     }
+    
+
+        
+    
+
+    
 
     return (
         <div className="container-fluid">
@@ -46,6 +71,7 @@ export function LoginPage(){
                     firebaseAuth={authenticator}
                     uiConfig={configObj}
                 />
+                
             </section>
         </div>
     )

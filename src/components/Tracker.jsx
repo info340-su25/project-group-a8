@@ -7,8 +7,7 @@ import { Link } from "react-router-dom";
 import { getDatabase, ref, push as firebasePush, onValue } from 'firebase/database';
 
 export default function Tracker() {
-
-            const [username , setUsername] = useState('Ellie');
+            const [username , setUsername] = useState('user');
             const [mood , setMood] = useState({ energy: 5, stress: 5, excitement: 5, overallMood: 5 });
 
             const [socialBatterySlider , setSocialBatterySlider] = useState(5);
@@ -29,6 +28,8 @@ export default function Tracker() {
 
 
             const nav = useNavigate();
+
+            //setUsername(userInfo.userName);
 
             useEffect(() =>{
                 //subscribe to the database - for allCheckinEntries
@@ -106,7 +107,7 @@ export default function Tracker() {
                     <header className="d-flex justify-content-between align-items-center px-4 py-3 border-bottom">
                         <img src="/img/unfold_logo.png" alt="Unfold Logo" height="60" />
                         <nav className="d-none d-md-flex gap-4">
-                            <Link to="/" className="nav-link">Home</Link>
+                            <Link to="/home" className="nav-link">Home</Link>
                             <Link to="/tracker" className="nav-link">Daily Check-In</Link>
                             <Link to="/joy" className="nav-link">Joy Bubble</Link>
                             <Link to="/forecast" className="nav-link">Forecast</Link>

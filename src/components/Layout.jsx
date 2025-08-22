@@ -72,7 +72,7 @@ export default function Layout({ children }) {
             {/* Header */}
             <header className="d-flex justify-content-between align-items-center px-4 py-3 border-bottom position-relative">
                 <div className="d-flex align-items-center">
-                    <Link to="/">
+                    <Link to="/home">
                         <img src="img/unfold_logo.png" alt="Unfold Logo" height="60" />
                     </Link>
                     <span className="visually-hidden">Navigate to home</span>
@@ -132,7 +132,7 @@ export default function Layout({ children }) {
                     
                     <ul className="mobile-menu-list">
                         <li>
-                            <Link to="/" className="mobile-menu-link" onClick={closeMobileMenu}>
+                            <Link to="/home" className="mobile-menu-link" onClick={closeMobileMenu}>
                                 🏠 Home
                             </Link>
                         </li>

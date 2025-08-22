@@ -155,18 +155,18 @@ export default function JoyBubble() {
     <div>
       <header className="d-flex justify-content-between align-items-center px-4 py-3 border-bottom">
         <div className="d-flex align-items-center">
-            <Link to="/" className="d-flex align-items-center text-decoration-ne">
+            <Link to="/home" className="d-flex align-items-center text-decoration-ne">
                 <img src="/img/unfold_logo.png" alt="Unfold Logo" height="60" />
                 <span className="visually-hidden">Home</span>
             </Link>
         </div>
                     <nav className="d-none d-md-flex gap-4">
-                      <Link to="/" className="nav-link">Home</Link>
+                      <Link to="/home" className="nav-link">Home</Link>
                       <Link to="/tracker" className="nav-link">Daily Check-In</Link>
                       <Link to="/joy" className="nav-link">Joy Bubble</Link>
                       <Link to="/forecast" className="nav-link">Forecast</Link>
                       <Link to="/about" className="nav-link">About</Link>
-                            
+                      
                         
                     </nav>
                     <button className="btn menu-toggle d-md-none" aria-label="Menu">&#9776;</button>

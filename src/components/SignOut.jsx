@@ -15,12 +15,12 @@ export function SignOut() {
         .then(() => {
             console.log("Sign Out Successful");
             setTimeout(() => {
-                navigate("/login");
+                navigate("/");
             }, 3000);   
         })
         .catch((error) => {
             console.error("Error signing out:", error);
-            navigate("/login");
+            navigate("/");
         });
     }, [navigate]);
     return( 

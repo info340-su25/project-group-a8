@@ -14,7 +14,7 @@ export default function NotFound() {
                         Let's get you back to a peaceful place where you can continue your journey.
                     </p>
                     <div className="d-flex flex-column flex-md-row gap-3 justify-content-center">
-                        <Link to="/" className="btn joy-btn btn-lg">
+                        <Link to="/home" className="btn joy-btn btn-lg">
                             Return Home
                         </Link>
                         <Link to="/tracker" className="btn action-btn btn-lg">
