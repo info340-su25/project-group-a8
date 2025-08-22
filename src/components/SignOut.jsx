@@ -13,7 +13,7 @@ export function SignOut() {
         //this was added by chatGPT to know how to do a set a wait time for this page
         // before navigating 
         .then(() => {
-            console.log("Signed Out Successful");
+            console.log("Sign Out Successful");
             setTimeout(() => {
                 navigate("/login");
             }, 3000);   

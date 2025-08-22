@@ -2,12 +2,15 @@
 import { StyledFirebaseAuth } from "react-firebaseui";
 import { getAuth, EmailAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import App from './App.jsx';
+import { useNavigate } from "react-router-dom";
 
 
 
 
 export function LoginPage(){
     //const [currUser, setCurrUser] = useState([]);
+    //added navigate by chat to know how to navigate after authentication
+    const navigate = useNavigate();
     const authenticator = getAuth();
 
     const configObj = {
@@ -19,6 +22,7 @@ export function LoginPage(){
         credentialHelper: 'none', //don't show the email account chooser
         callbacks: { //"lifecycle" callbacks
           signInSuccessWithAuthResult: () => {
+            navigate('/');
             return false; //don't redirect after authentication
           }
         }
