@@ -1,6 +1,23 @@
+import { Link } from "react-router-dom";
+
+
 export default function About() {
   return (
         <div>
+            <header className="d-flex justify-content-between align-items-center px-4 py-3 border-bottom">
+                <img src="/img/unfold_logo.png" alt="Unfold Logo" height="60" />
+                <nav className="d-none d-md-flex gap-4">
+                    <Link to="/home" className="nav-link">Home</Link>
+                    <Link to="/tracker" className="nav-link">Daily Check-In</Link>
+                    <Link to="/joy" className="nav-link">Joy Bubble</Link>
+                    <Link to="/forecast" className="nav-link">Forecast</Link>
+                    <Link to="/about" className="nav-link">About</Link>
+                    <Link to="/signOut" className="nav-link">Sign-Out</Link>
+
+                    
+                </nav> 
+                <button className="btn menu-toggle d-md-none" aria-label="Menu">&#9776;</button>
+            </header> 
             <main className="container-fluid pt-5">
               
                 <section className="hero-section text-center py-5">
@@ -75,15 +92,15 @@ export default function About() {
                             {/* Person 3 */}
                             <div className="col-12 col-md-6 col-lg-3">
                                 <article className="team-card rounded-4 p-3 shadow-lg">
-                                <img src="/img/team-3.jpg" alt="Fiona Evans" className="team-avatar" width="96" height="96" />
+                                <img src="/img/team-fiona.png" alt="Fiona Evans" className="team-avatar team-img" />
                                 <div className="team-body">
                                     <h3 className="text-center pb-2 pt-3 text-dark-green">Fiona Evans</h3>
                                     <div className="links pb-3">
-                                        <a href="https://www.linkedin.com/in/kristina-tran-496350376/" target="_blank" rel="noreferrer" className="link-dark-green">LinkedIn</a>
-                                        <a href="mailto:ktran000@uw.edu" className="link-dark-green">Email</a>
+                                        <a href="https://www.linkedin.com/in/fiona-evans-3b348b241/" target="_blank" rel="noreferrer" className="link-dark-green">LinkedIn</a>
+                                        <a href="mailto:fevans05@uw.edu" className="link-dark-green">Email</a>
                                     </div>
-                                    <div className="text-center small mb-3"><strong>Double Degree:</strong> Informatics w/ Data Science & Biochemistry</div>
-                                    <div className="text-center small mb-4s"><strong>Interests:</strong> Software Development, Backend Development, Machine Learning</div>
+                                    <div className="text-center small mb-3"><strong>Degree:</strong> Intended Informatics major with a minor in Cybersecurity</div>
+                                    <div className="text-center small mb-4s"><strong>Interests:</strong> Project Managment, Cybersecurity, Web Development</div>
                                 </div>
                                 </article>
                             </div>

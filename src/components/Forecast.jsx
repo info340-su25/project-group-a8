@@ -38,59 +38,10 @@ export default function Forecast( {currUser}) {
             
         })
     }, [])
-    // let stress = tempData.mood.stress;
-    // let overall = tempData.mood.overallMood;
-    // let stressCount = 0;
-    // let overallCount = 0;
-    // if (stress > 7){
-    //     stressCount = 2;
-    // } else if (stress > 4){
-    //     stressCount = 1;
-    // } else {
-    //     stressCount = 0;
-    // }
-    // if (overall > 7){
-    //     overallCount = 2;
-    // } else if (overall > 4){
-    //     overallCount = 1;
-    // } else {
-    //     overallCount = 0;
-    // }
+   
 
-    // //interprets data into string value
-    // let feeling = '';
-    // if (overallCount == 2 && stressCount == 0){
-    //     feeling = 'Happy';
-    // }else if (overallCount == 1 && stressCount == 0){
-    //     feeling = 'Content';
-    // }else if (overallCount == 0 && stressCount == 0){
-    //     feeling = 'Sad';
-    // }else if (overallCount == 2 && stressCount == 1){
-    //     feeling = 'Content';
-    // }else if (overallCount == 1 && stressCount == 1){
-    //     feeling = 'Neutral';
-    // }else if (overallCount == 0 && stressCount == 1){
-    //     feeling = 'Anxious';
-    // }else if (overallCount == 2 && stressCount == 2){
-    //     feeling = 'Neutral';
-    // }else if (overallCount == 1 && stressCount == 2){
-    //     feeling = 'Anxious';
-    // }else if (overallCount == 0 && stressCount == 2){
-    //     feeling = 'Stressed';
-    // } else {
-    //     feeling = 'Mixed';
-    // }
-
-    // // Takes needed data from checkin to make data obj for forecast 
-    // const forecastData = {
-    //     id: tempData.createdAt,
-    //     date: tempData.createdAt,
-    //     mood: feeling,
-    //     energy: tempData.mood.energy,
-    //     sleep: tempData.sleep.restfulness,
-    //     thoughts: brainDump
-    // };
-
+    // USED CHATGPT HELP TO TURN MY PREVIOUS CODE INTO SHORT READABLE CONTENT INSTEAD
+    // OF THE CONTINUAL IF ELSE  STATEMENTS 
     const moodEntries = tempData.map(entry => ({
         date: entry.createdAt,
         energy: entry.mood?.energy || 0,
@@ -380,7 +331,7 @@ export default function Forecast( {currUser}) {
                 <div className="container">
                     <h2 className="mb-4">Need to Reset?</h2>
                     <p className="lead mb-4">When the emotional weather gets stormy, find calm in your reset room.</p>
-                    <a href="/reset-room" className="btn joy-btn btn-lg">Enter Reset Room</a>
+                    <button className="btn joy-btn btn-lg">Enter Reset Room (Coming Soon!)</button>
                 </div>
             </section>
         </div>

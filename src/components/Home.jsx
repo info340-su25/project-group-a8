@@ -32,6 +32,20 @@ export default function Home( {currUser, setCurrUser}) {
 
     return (
         <div className="container-fluid">
+            <header className="d-flex justify-content-between align-items-center px-4 py-3 border-bottom">
+                <img src="/img/unfold_logo.png" alt="Unfold Logo" height="60" />
+                <nav className="d-none d-md-flex gap-4">
+                    <Link to="/home" className="nav-link">Home</Link>
+                    <Link to="/tracker" className="nav-link">Daily Check-In</Link>
+                    <Link to="/joy" className="nav-link">Joy Bubble</Link>
+                    <Link to="/forecast" className="nav-link">Forecast</Link>
+                    <Link to="/about" className="nav-link">About</Link>
+                    <Link to="/signOut" className="nav-link">Sign-Out</Link>
+
+                    
+                </nav> 
+                <button className="btn menu-toggle d-md-none" aria-label="Menu">&#9776;</button>
+            </header> 
             {/* Hero Section */}
             <section className="hero-section text-center py-5">
                 <div className="container">
@@ -68,9 +82,10 @@ export default function Home( {currUser, setCurrUser}) {
                                 <div className="text-center mb-3">
                                     <div className="feature-icon mb-3">✨</div>
                                     <h3 className="text-dark-green">One Small Shift</h3>
+                                    <p className="text-dark-green">(Coming Soon!)</p>
                                 </div>
                                 <p className="text-muted mb-4 text-center">Discover micro-habits and offline activities. Sometimes the smallest changes make the biggest difference.</p>
-                                <Link to="/generator" className="btn btn-outline action-btn w-100">Generate Ideas</Link>
+                                <button className="btn btn-outline action-btn w-100">Generate Ideas</button>
                             </div>
                         </div>
                         
@@ -101,9 +116,10 @@ export default function Home( {currUser, setCurrUser}) {
                                 <div className="text-center mb-3">
                                     <div className="feature-icon mb-3">🪞</div>
                                     <h3 className="text-dark-green">Reflection Pond</h3>
+                                    <p className="text-dark-green">(Coming Soon!)</p>
                                 </div>
                                 <p className="text-muted mb-4 text-center">Look back on your journey and see how far you've come. Progress isn't always linear.</p>
-                                <Link to="/reflection" className="btn btn-outline action-btn w-100">Reflect</Link>
+                                <button className="btn btn-outline action-btn w-100">Reflect</button>
                             </div>
                         </div>
                         
@@ -112,9 +128,10 @@ export default function Home( {currUser, setCurrUser}) {
                                 <div className="text-center mb-3">
                                     <div className="feature-icon mb-3">🕯️</div>
                                     <h3 className="text-dark-green">Reset Room</h3>
+                                    <p className="text-dark-green">(Coming Soon!)</p>
                                 </div>
                                 <p className="text-muted mb-4 text-center">A calming digital space to breathe and reset when life feels overwhelming.</p>
-                                <Link to="/reset-room" className="btn btn-outline action-btn w-100">Enter Room</Link>
+                                <button className="btn btn-outline action-btn w-100">Enter Room</button>
                             </div>
                         </div>
                     </div>
@@ -127,7 +144,7 @@ export default function Home( {currUser, setCurrUser}) {
                     <h2 className="mb-4">Ready to begin your wellness journey?</h2>
                     <p className="lead mb-4">Start small. Start today. You deserve to unfold.</p>
                     <Link to="/tracker" className="btn action-btn btn-lg me-3">Begin Check-In</Link>
-                    <Link to="/generator" className="btn btn-outline action-btn btn-lg me-3">Get Inspiration</Link>
+                    <button className="btn btn-outline action-btn btn-lg me-3">Get Inspiration (Coming Soon!)</button>
                     {/* add sign out  */}
                     <Link to="/signOut" className="btn btn-outline action-btn btn-lg me-3">Sign-Out</Link>
                 </div>
