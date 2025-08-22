@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import { onAuthStateChanged, getAuth } from 'firebase/auth';
+
 
 
 import { getDatabase, ref, push as firebasePush, onValue } from 'firebase/database';
 
 export default function Tracker() {
-            const [username , setUsername] = useState('user');
+            const [currUser, setCurrUser] = useState([]);
             const [mood , setMood] = useState({ energy: 5, stress: 5, excitement: 5, overallMood: 5 });
 
             const [socialBatterySlider , setSocialBatterySlider] = useState(5);
@@ -29,7 +31,26 @@ export default function Tracker() {
 
             const nav = useNavigate();
 
-            //setUsername(userInfo.userName);
+            
+
+            useEffect(() =>{
+                const auth = getAuth();
+                onAuthStateChanged(auth, (firebaseUserObj) => {
+                console.log("auth state has changed");
+                if (firebaseUserObj != null){
+                    console.log(firebaseUserObj);
+                    console.log("firebase logs user as:", firebaseUserObj);
+                    firebaseUserObj.userId = firebaseUserObj.uid;
+                    firebaseUserObj.userName = firebaseUserObj.displayName;
+                    setCurrUser(firebaseUserObj);
+                    console.log("user is updated to current");
+                }else{
+                    setCurrUser(signedOutUser[0]);
+        
+                }
+                
+                })
+            }, []);
 
             useEffect(() =>{
                 //subscribe to the database - for allCheckinEntries
@@ -85,12 +106,12 @@ export default function Tracker() {
                 const db = getDatabase();
                 console.log(db);
 
-                const allCheckinEntriesRef = ref(db, "allCheckinEntries");
+                const username = currUser.userName;
+                const allCheckinEntriesRef = ref(db, `${username}/checkinEntries`);
                 firebasePush(allCheckinEntriesRef, checkinData)
                 .then(()=> {
                     console.log("data saved");
-                    //setCheckins(prev => [{ id: crypto.randomUUID(), ...checkinData }, ...prev]);
-                    //console.log(checkins);
+                    
                     setBrainDump('');
                     setGratitudeEntries(['' , '' , '']);
     
@@ -119,7 +140,7 @@ export default function Tracker() {
 
                     <main className="container py-4">
                         <div className="text-center mb-4">
-                            <h2>Hi, {username}</h2>
+                            <h2>Hi, {currUser.userName}</h2>
                             <h3>How are you feeling today?</h3>
 
                             <div className="d-flex justify-content-center my-3 mt-5">

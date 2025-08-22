@@ -16,26 +16,6 @@ import { LoginPage } from './LoginPage.jsx';
 
 
 function App() {
-  
-  // const [authInitialized, setAuthInitialized] = useState(false);
-
-  // useEffect(() => {
-  //   const auth = getAuth();
-  //   const unsubscribe = onAuthStateChanged(auth, (firebaseUserObj) => {
-  //     if (firebaseUserObj != null){
-  //       firebaseUserObj.userId = firebaseUserObj.uid;
-  //       firebaseUserObj.userName = firebaseUserObj.displayName;
-  //       setCurrUser(firebaseUserObj);
-  //     } else {
-  //       setCurrUser(signedOutUser[0]);
-  //     }
-  //     setAuthInitialized(true); // mark that auth state has loaded
-  //   });
-
-  //   return () => unsubscribe();
-  // }, []);
-
-  
 
 
 

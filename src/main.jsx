@@ -4,7 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { LoginPage } from './LoginPage.jsx';
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -24,11 +23,10 @@ const firebaseConfig = {
 // Initialize Firebase
 initializeApp(firebaseConfig);
 
-
+//chatgpt added the userprovider to utilize global user 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    
-    <App />
+      <App />
   </BrowserRouter>
 );
 

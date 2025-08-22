@@ -6,27 +6,29 @@ import { onAuthStateChanged, getAuth } from 'firebase/auth';
 import { signedOutUser } from "./samples";
 
 
+
 export default function Home() {
 
     const [currUser, setCurrUser] = useState([]);
 
-    const auth = getAuth();
-    onAuthStateChanged(auth, (firebaseUserObj) => {
-      console.log("auth state has changed");
-      if (firebaseUserObj != null){
-        console.log(firebaseUserObj);
-        console.log("firebase logs user as:", firebaseUserObj);
-        firebaseUserObj.userId = firebaseUserObj.uid;
-        firebaseUserObj.userName = firebaseUserObj.displayName;
-        setCurrUser(firebaseUserObj);
-        console.log("user is updated to current");
-      }else{
-        setCurrUser(signedOutUser[0]);
+    useEffect(() =>{
+        const auth = getAuth();
+        onAuthStateChanged(auth, (firebaseUserObj) => {
+        console.log("auth state has changed");
+        if (firebaseUserObj != null){
+            console.log(firebaseUserObj);
+            console.log("firebase logs user as:", firebaseUserObj);
+            firebaseUserObj.userId = firebaseUserObj.uid;
+            firebaseUserObj.userName = firebaseUserObj.displayName;
+            setCurrUser(firebaseUserObj);
+            console.log("user is updated to current");
+        }else{
+            setCurrUser(signedOutUser[0]);
 
-      }
-      
-    })
-
+        }
+        
+        })
+    }, []);
 
 
     return (
@@ -34,7 +36,8 @@ export default function Home() {
             {/* Hero Section */}
             <section className="hero-section text-center py-5">
                 <div className="container">
-                    <h1 className="display-3 fw-bold mb-4">Welcome to Unfold</h1>
+                    <h1 className="display-3 fw-bold mb-4">Welcome to Unfold {currUser.userName}</h1>
+                    
                     <p className="lead mb-5">Your digital wellness garden for reflection, growth, and joy</p>
                     
                     <div className="d-flex justify-content-center mb-5">
