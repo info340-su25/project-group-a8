@@ -34,15 +34,15 @@ function App() {
         
         <Route 
           path="/tracker" 
-          element={<Tracker moodEntries={sampleMoodEntries} currUser={currUser} />} 
+          element={<Tracker currUser={currUser} />} 
         />
         <Route 
           path="/forecast" 
-          element={<Forecast moodEntries={sampleMoodEntries} />} 
+          element={<Forecast currUser={currUser} />} 
         />
         <Route 
           path="/joy" 
-          element={<JoyBubble joyMoments={sampleJoyMoments} currUser={currUser}/>} 
+          element={<JoyBubble currUser={currUser}/>} 
         />
         <Route 
           path="/about" 

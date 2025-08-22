@@ -51,7 +51,6 @@ export default function JoyBubble( {currUser}) {
 
 
 
-  //SHOULD THIS BE A FUNCTION CALLED AFTER EVERY ADD?
   useEffect(() =>{
     //subscribe to the database - for allJoyBubbles
 
@@ -123,23 +122,45 @@ export default function JoyBubble( {currUser}) {
       try {setMoments(JSON.parse(event));} catch {}}}, [] );
 
     // used chatgpt for understanding/writing local storage try/catch and saving moments after page refresh
+  // useEffect(() => {
+  //   let incoming;
+
+  //   if ( location.state && location.state.newMoments ) {
+  //       incoming = location.state.newMoments;
+  //   } else {
+  //       incoming = []
+  //   };
+
+  //   if (incoming && Array.isArray(incoming) && incoming.length > 0) {
+  //     const currentDate = new Date().toISOString().slice(0 , 10);
+  //     const mapped = incoming.filter(Boolean).map((text) => ({ id: crypto.randomUUID(), title: text, description: "", date: currentDate, category: "Gratitude"}));
+  //     // used chatgpt to get ID (using crypto + randomUUID)
+  //     const newMoments = [...mapped, ...moments];
+  //     //addToDatabase(newMoments);
+  //   }
+  // });
+
+  //ADDED BY CHATGPT - had to change another teammates code to work with the database so there
+  // wasnt any infinite loops 
   useEffect(() => {
-    let incoming;
-
-    if ( location.state && location.state.newMoments ) {
-        incoming = location.state.newMoments;
-    } else {
-        incoming = []
-    };
-
-    if (incoming && Array.isArray(incoming) && incoming.length > 0) {
-      const currentDate = new Date().toISOString().slice(0 , 10);
-      const mapped = incoming.filter(Boolean).map((text) => ({ id: crypto.randomUUID(), title: text, description: "", date: currentDate, category: "Gratitude"}));
-      // used chatgpt to get ID (using crypto + randomUUID)
-      const newMoments = [...mapped, ...moments];
-      addToDatabase(newMoments);
+    let incoming = location.state?.newMoments || [];
+  
+    if (incoming.length > 0) {
+      const currentDate = new Date().toISOString().slice(0, 10);
+      const mapped = incoming.filter(Boolean).map((text) => ({
+        id: crypto.randomUUID(),
+        title: text,
+        description: "",
+        date: currentDate,
+        category: "Gratitude",
+      }));
+  
+      // Push each individually to avoid nested arrays
+      mapped.forEach(moment => addToDatabase(moment)); 
+      
     }
-  });
+  }, [location.state?.newMoments]);
+
   const handleAdd = (event) => {
         event.preventDefault();
 
@@ -186,6 +207,7 @@ export default function JoyBubble( {currUser}) {
                       <Link to="/joy" className="nav-link">Joy Bubble</Link>
                       <Link to="/forecast" className="nav-link">Forecast</Link>
                       <Link to="/about" className="nav-link">About</Link>
+                      <Link to="/signOut" className="nav-link">Sign-Out</Link>
                       
                         
                     </nav>

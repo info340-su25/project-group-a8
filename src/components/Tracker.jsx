@@ -60,8 +60,7 @@ export default function Tracker({currUser}) {
                     const data = snapshot.val();
 
                     if(!snapshot.val()){
-                        setMoments([]);
-                        saveMoments([]);
+                        setCheckins([]);
                         return;
                       }
                     const keyArray = Object.keys(data);
@@ -107,18 +106,77 @@ export default function Tracker({currUser}) {
                 const checkinData = {createdAt: Date.now(), mood, socialBattery : socialBatterySlider, socialPlans, screenTime, digitalHabits, mindSpace, sleep, brainDump, gratitudeEntries: gratitudeEntries.filter(Boolean), overallScore};
                 console.log(checkinData);
 
+
+                //CREATE DATA READABLE FOR FORECAST 
+                let stress = mood.stress;
+                let overall = mood.overallMood;
+                let stressCount = 0;
+                let overallCount = 0;
+                if (stress > 7){
+                    stressCount = 2;
+                } else if (stress > 4){
+                    stressCount = 1;
+                } else {
+                    stressCount = 0;
+                }
+                if (overall > 7){
+                    overallCount = 2;
+                } else if (overall > 4){
+                    overallCount = 1;
+                } else {
+                    overallCount = 0;
+                }
+
+                //interprets data into string value
+                let feeling = '';
+                if (overallCount == 2 && stressCount == 0){
+                    feeling = 'Happy';
+                }else if (overallCount == 1 && stressCount == 0){
+                    feeling = 'Content';
+                }else if (overallCount == 0 && stressCount == 0){
+                    feeling = 'Sad';
+                }else if (overallCount == 2 && stressCount == 1){
+                    feeling = 'Content';
+                }else if (overallCount == 1 && stressCount == 1){
+                    feeling = 'Neutral';
+                }else if (overallCount == 0 && stressCount == 1){
+                    feeling = 'Anxious';
+                }else if (overallCount == 2 && stressCount == 2){
+                    feeling = 'Neutral';
+                }else if (overallCount == 1 && stressCount == 2){
+                    feeling = 'Anxious';
+                }else if (overallCount == 0 && stressCount == 2){
+                    feeling = 'Stressed';
+                } else {
+                    feeling = 'Mixed';
+                }
+
+                // Takes needed data from checkin to make data obj for forecast 
+                const forecastData = {
+                    id: Date.now(),
+                    date: Date.now(),
+                    mood: feeling,
+                    energy: mood.energy,
+                    sleep: sleep.restfulness,
+                    thoughts: brainDump
+                };
+
+
                 const db = getDatabase();
                 console.log(db);
 
                 const username = currUser.userName;
+
                 const allCheckinEntriesRef = ref(db, `${username}/checkinEntries`);
+
+            
+                //ADD TO CHECKINS
                 firebasePush(allCheckinEntriesRef, checkinData)
                 .then(()=> {
-                    console.log("data saved");
+                    console.log("data saved to checkins");
                     
                     setBrainDump('');
                     setGratitudeEntries(['' , '' , '']);
-    
                     nav("/joy", {state:{ newMoments: gratitudeEntries.filter(Boolean) , from: "tracker", createdAt: Date.now() }});
                 
                 })
@@ -126,6 +184,36 @@ export default function Tracker({currUser}) {
                     console.error("error in saving ");
                 })
                }
+            // const db = getDatabase();
+            // const username = currUser.userName;
+
+            // const allCheckinEntriesRef = ref(db, `${username}/checkinEntries`);
+            // const allForecastEntriesRef = ref(db, `${username}/forecastEntries`);
+
+            // // Save checkinData
+            // firebasePush(allCheckinEntriesRef, checkinData)
+            //     .then(() => {
+            //     console.log("data saved to checkins");
+
+            //     return firebasePush(allForecastEntriesRef, forecastData);
+            //     })
+            //     .then(() => {
+            //     console.log("forecast data saved");
+
+            //     setBrainDump('');
+            //     setGratitudeEntries(['', '', '']);
+            //     nav("/joy", {
+            //         state: {
+            //         newMoments: gratitudeEntries.filter(Boolean),
+            //         from: "tracker",
+            //         createdAt: Date.now(),
+            //         },
+            //     });
+            //     })
+            //     .catch((err) => {
+            //     console.error("error in saving", err);
+            //     });
+            // };
 
             return (
                 <div className="bg-green text-cream">
@@ -137,6 +225,8 @@ export default function Tracker({currUser}) {
                             <Link to="/joy" className="nav-link">Joy Bubble</Link>
                             <Link to="/forecast" className="nav-link">Forecast</Link>
                             <Link to="/about" className="nav-link">About</Link>
+                            <Link to="/signOut" className="nav-link">Sign-Out</Link>
+
                             
                         </nav> 
                         <button className="btn menu-toggle d-md-none" aria-label="Menu">&#9776;</button>

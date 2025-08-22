@@ -1,10 +1,122 @@
-import { useState, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { Link } from 'react-router-dom';
 
-export default function Forecast({ moodEntries = [] }) {
+import { getDatabase, ref, push as firebasePush, onValue } from 'firebase/database';
+
+export default function Forecast( {currUser}) {
     const [selectedMetric, setSelectedMetric] = useState('energy');
     const [isLoading, setIsLoading] = useState(false);
+    const [tempData, setTempData] = useState([]);
+    const [forcastData, setForcastData] = useState([]);
 
+    //let moodEntries = [];
+
+    useEffect(() =>{
+    
+        const db = getDatabase();
+        const username = currUser.userName;
+        const allJoyBubblesRef = ref(db, `${username}/checkinEntries`);
+        
+        onValue(allJoyBubblesRef, function(snapshot){
+            const data = snapshot.val();
+    
+            if(!snapshot.val()){
+              setForcastData([]);
+              return;
+            }
+            const keyArray = Object.keys(data);
+            const dataArray =  keyArray.map((keyString) => {
+                const transformed = data[keyString];
+                transformed.firebaseKey = keyString;
+                return transformed;
+            }) 
+            //console.log(data);
+            setTempData(dataArray); 
+            console.log("this is temp data", tempData);
+            //console.log(forcastData);
+            
+        })
+    }, [])
+    // let stress = tempData.mood.stress;
+    // let overall = tempData.mood.overallMood;
+    // let stressCount = 0;
+    // let overallCount = 0;
+    // if (stress > 7){
+    //     stressCount = 2;
+    // } else if (stress > 4){
+    //     stressCount = 1;
+    // } else {
+    //     stressCount = 0;
+    // }
+    // if (overall > 7){
+    //     overallCount = 2;
+    // } else if (overall > 4){
+    //     overallCount = 1;
+    // } else {
+    //     overallCount = 0;
+    // }
+
+    // //interprets data into string value
+    // let feeling = '';
+    // if (overallCount == 2 && stressCount == 0){
+    //     feeling = 'Happy';
+    // }else if (overallCount == 1 && stressCount == 0){
+    //     feeling = 'Content';
+    // }else if (overallCount == 0 && stressCount == 0){
+    //     feeling = 'Sad';
+    // }else if (overallCount == 2 && stressCount == 1){
+    //     feeling = 'Content';
+    // }else if (overallCount == 1 && stressCount == 1){
+    //     feeling = 'Neutral';
+    // }else if (overallCount == 0 && stressCount == 1){
+    //     feeling = 'Anxious';
+    // }else if (overallCount == 2 && stressCount == 2){
+    //     feeling = 'Neutral';
+    // }else if (overallCount == 1 && stressCount == 2){
+    //     feeling = 'Anxious';
+    // }else if (overallCount == 0 && stressCount == 2){
+    //     feeling = 'Stressed';
+    // } else {
+    //     feeling = 'Mixed';
+    // }
+
+    // // Takes needed data from checkin to make data obj for forecast 
+    // const forecastData = {
+    //     id: tempData.createdAt,
+    //     date: tempData.createdAt,
+    //     mood: feeling,
+    //     energy: tempData.mood.energy,
+    //     sleep: tempData.sleep.restfulness,
+    //     thoughts: brainDump
+    // };
+
+    const moodEntries = tempData.map(entry => ({
+        date: entry.createdAt,
+        energy: entry.mood?.energy || 0,
+        sleep: entry.sleep?.restfulness || 0,
+        mood: (() => {
+          // Example: translate stress & overallMood into a feeling string
+          const stress = entry.mood?.stress || 5;
+          const overall = entry.mood?.overallMood || 5;
+          let stressCount = stress > 7 ? 2 : stress > 4 ? 1 : 0;
+          let overallCount = overall > 7 ? 2 : overall > 4 ? 1 : 0;
+      
+          if (overallCount === 2 && stressCount === 0) return 'Happy';
+          if (overallCount === 1 && stressCount === 0) return 'Content';
+          if (overallCount === 0 && stressCount === 0) return 'Sad';
+          if (overallCount === 2 && stressCount === 1) return 'Content';
+          if (overallCount === 1 && stressCount === 1) return 'Neutral';
+          if (overallCount === 0 && stressCount === 1) return 'Anxious';
+          if (overallCount === 2 && stressCount === 2) return 'Neutral';
+          if (overallCount === 1 && stressCount === 2) return 'Anxious';
+          if (overallCount === 0 && stressCount === 2) return 'Stressed';
+          return 'Mixed';
+        })(),
+        thoughts: entry.brainDump || ""
+      }));
+
+    //const moodEntries = [];
     const todaysSummary = useMemo(() => {
         if (!moodEntries || moodEntries.length === 0) {
             return {
@@ -98,6 +210,20 @@ export default function Forecast({ moodEntries = [] }) {
 
     return (
         <div className="container-fluid">
+             <header className="d-flex justify-content-between align-items-center px-4 py-3 border-bottom">
+                <img src="/img/unfold_logo.png" alt="Unfold Logo" height="60" />
+                <nav className="d-none d-md-flex gap-4">
+                    <Link to="/home" className="nav-link">Home</Link>
+                    <Link to="/tracker" className="nav-link">Daily Check-In</Link>
+                    <Link to="/joy" className="nav-link">Joy Bubble</Link>
+                    <Link to="/forecast" className="nav-link">Forecast</Link>
+                    <Link to="/about" className="nav-link">About</Link>
+                    <Link to="/signOut" className="nav-link">Sign-Out</Link>
+
+                    
+                </nav> 
+                <button className="btn menu-toggle d-md-none" aria-label="Menu">&#9776;</button>
+            </header> 
             <section className="hero-section text-center py-5">
                 <div className="container">
                     <h1 className="display-3 fw-bold mb-4">Emotional Forecast</h1>
